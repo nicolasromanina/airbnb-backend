@@ -1,0 +1,3076 @@
+{
+  "pages": {
+    "home": {
+      "hero": {
+        "title": "<p>Bienvenue</p>",
+        "subtitle": "Sous-titre",
+        "image": ""
+      },
+      "welcome": {
+        "title": "Welcome",
+        "paragraphs": [
+          "Paragraphe 1",
+          "Paragraphe 2"
+        ],
+        "images": [
+          "",
+          ""
+        ],
+        "icons": [
+          "",
+          ""
+        ]
+      },
+      "stats": [
+        {
+          "value": "100",
+          "label": "Clients"
+        },
+        {
+          "value": "250",
+          "label": "Réservations"
+        },
+        {
+          "value": "50",
+          "label": "Chambres"
+        },
+        {
+          "value": "5",
+          "label": "Étoiles"
+        }
+      ],
+      "services": [
+        {
+          "title": "Service A",
+          "desc": "",
+          "image": ""
+        },
+        {
+          "title": "Service B",
+          "desc": "",
+          "image": ""
+        },
+        {
+          "title": "Service C",
+          "desc": "",
+          "image": ""
+        }
+      ],
+      "features": [],
+      "marquee": "Texte défilant sample",
+      "threeCards": [
+        {
+          "title": "C1",
+          "desc": ""
+        },
+        {
+          "title": "C2",
+          "desc": ""
+        },
+        {
+          "title": "C3",
+          "desc": ""
+        }
+      ],
+      "featureRoom": {
+        "content": "",
+        "images": [
+          "",
+          ""
+        ]
+      },
+      "logos": [],
+      "sectionsOrder": [
+        "hero",
+        "welcome",
+        "stats",
+        "services",
+        "features",
+        "marquee",
+        "threeCards",
+        "featureRoom",
+        "logos"
+      ]
+    }
+  },
+  "history": {
+    "home": [
+      {
+        "id": 1769189786791,
+        "at": 1769189786791,
+        "data": {
+          "hero": {
+            "title": "<p>Bienvenue</p>",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189744257,
+        "at": 1769189744257,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189713576,
+        "at": 1769189713576,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189659266,
+        "at": 1769189659266,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189628267,
+        "at": 1769189628267,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189597253,
+        "at": 1769189597253,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189555266,
+        "at": 1769189555266,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189524271,
+        "at": 1769189524271,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189493269,
+        "at": 1769189493269,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189462276,
+        "at": 1769189462276,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189431256,
+        "at": 1769189431256,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189400272,
+        "at": 1769189400272,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189347263,
+        "at": 1769189347263,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189316248,
+        "at": 1769189316248,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189285269,
+        "at": 1769189285269,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189254264,
+        "at": 1769189254264,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189223264,
+        "at": 1769189223264,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189192280,
+        "at": 1769189192280,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189161264,
+        "at": 1769189161264,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189130242,
+        "at": 1769189130242,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189099260,
+        "at": 1769189099260,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189068239,
+        "at": 1769189068239,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189037251,
+        "at": 1769189037251,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769189006242,
+        "at": 1769189006242,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188975767,
+        "at": 1769188975767,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188945673,
+        "at": 1769188945673,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188915532,
+        "at": 1769188915532,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188865255,
+        "at": 1769188865255,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188835179,
+        "at": 1769188835179,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188805065,
+        "at": 1769188805065,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      },
+      {
+        "id": 1769188774912,
+        "at": 1769188774912,
+        "data": {
+          "hero": {
+            "title": "Bienvenue",
+            "subtitle": "Sous-titre",
+            "image": ""
+          },
+          "welcome": {
+            "title": "Welcome",
+            "paragraphs": [
+              "Paragraphe 1",
+              "Paragraphe 2"
+            ],
+            "images": [
+              "",
+              ""
+            ],
+            "icons": [
+              "",
+              ""
+            ]
+          },
+          "stats": [
+            {
+              "value": "100",
+              "label": "Clients"
+            },
+            {
+              "value": "250",
+              "label": "Réservations"
+            },
+            {
+              "value": "50",
+              "label": "Chambres"
+            },
+            {
+              "value": "5",
+              "label": "Étoiles"
+            }
+          ],
+          "services": [
+            {
+              "title": "Service A",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service B",
+              "desc": "",
+              "image": ""
+            },
+            {
+              "title": "Service C",
+              "desc": "",
+              "image": ""
+            }
+          ],
+          "features": [],
+          "marquee": "Texte défilant sample",
+          "threeCards": [
+            {
+              "title": "C1",
+              "desc": ""
+            },
+            {
+              "title": "C2",
+              "desc": ""
+            },
+            {
+              "title": "C3",
+              "desc": ""
+            }
+          ],
+          "featureRoom": {
+            "content": "",
+            "images": [
+              "",
+              ""
+            ]
+          },
+          "logos": [],
+          "sectionsOrder": [
+            "hero",
+            "welcome",
+            "stats",
+            "services",
+            "features",
+            "marquee",
+            "threeCards",
+            "featureRoom",
+            "logos"
+          ]
+        }
+      }
+    ]
+  }
+}
