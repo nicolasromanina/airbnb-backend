@@ -1,0 +1,42 @@
+# Dans votre terminal, à la racine du backend
+cd E:\Airbnb\okk\hero-showcase\backend
+
+# Créez le fichier render.yaml
+@"
+services:
+  - type: web
+    name: airbnb-backend
+    env: node
+    region: frankfurt  # ou paris, virginia, singapore, etc.
+    plan: free  # ou starter, professional...
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false  # À configurer manuellement dans le dashboard
+      - key: JWT_SECRET
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: FRONTEND_URL
+        value: https://votre-frontend.vercel.app  # À modifier
+
+    # Configuration pour Node.js
+    nodeVersion: 18.17.0
+"@ | Out-File -FilePath render.yaml -Encoding UTF8
