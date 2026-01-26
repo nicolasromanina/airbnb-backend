@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "prod": "NODE_ENV=production node dist/index.js",
+    "postinstall": "npm run build",
     "test": "jest",
     "test:mongo": "ts-node-dev scripts/testMongo.ts",
     "test:health": "curl http://localhost:3000/health",
