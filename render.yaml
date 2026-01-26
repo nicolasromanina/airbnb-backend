@@ -21,6 +21,22 @@ services:
         sync: false
       - key: STRIPE_PUBLISHABLE_KEY
         sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        sync: false
+      - key: UPLOAD_DIR
+        sync: false
+      - key: MAX_FILE_SIZE
+        sync: false
+      - key: ALLOWED_EXTENSIONS
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_FROM
+        sync: false
       - key: SMTP_HOST
         sync: false
       - key: SMTP_PORT
