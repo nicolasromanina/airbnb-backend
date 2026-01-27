@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import footerController from '../controllers/footerController';
 import { authenticate } from '../middleware/auth.middleware';
-import { upload, uploadMultiple, uploadToCloudinary } from '../middleware/cloudinary.middleware';
+import { upload, uploadToCloudinary } from '../middleware/cloudinary.middleware';
 
 const router = Router();
 
@@ -33,7 +33,7 @@ router.post(
 router.post(
   '/gallery/multiple',
   authenticate,
-  uploadMultiple,
+  upload.array('images'),
   uploadToCloudinary,
   async (req: any, res: any) => {
     try {

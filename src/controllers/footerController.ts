@@ -129,7 +129,7 @@ class FooterController {
       }
 
       // Trouver l'image à supprimer
-      const imageToDelete = footer.galleryImages.find(img => img._id?.toString() === imageId);
+      const imageToDelete = footer.galleryImages.find(img => img._id && img._id.toString() === imageId);
       
       if (!imageToDelete) {
         res.status(404).json({ error: 'Image non trouvée' });

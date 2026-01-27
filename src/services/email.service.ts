@@ -90,7 +90,7 @@ Date : ${new Date().toLocaleString('fr-FR')}
     `;
 
     const mailOptions: EmailOptions = {
-      to: adminEmail,
+      to: adminEmail || 'admin@example.com',
       subject: `Nouveau message de contact de ${contactData.fullName}`,
       html,
       text

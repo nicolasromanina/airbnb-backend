@@ -86,7 +86,7 @@ class ContactController {
       res.status(500).json({
         success: false,
         message: 'Une erreur est survenue lors de l\'envoi du message',
-        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        error: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
       });
     }
   }

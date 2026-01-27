@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IGalleryImage {
+  _id?: mongoose.Types.ObjectId;
   image: string;
   cloudinaryPublicId: string;
   alt: string;
