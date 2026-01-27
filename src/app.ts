@@ -15,6 +15,7 @@ import apartmentRoutes from './routes/apartment.routes';
 import apartmentDetailRoutes from './routes/apartmentDetail.routes';
 import roomDetailRoutes from './routes/roomDetail.routes';
 import contactRoutes from './routes/contact.routes';
+import footerRoutes from './routes/footer.routes';
 import { errorHandler } from './middleware/error.middleware';
 import { logger } from './utils/logger';
 import { connectDatabase } from './config/database';
@@ -152,7 +153,9 @@ app.use(cors({
   app.use('/api/apartment-details', apartmentDetailRoutes);
   app.use('/api/room-details', roomDetailRoutes);
   app.use('/api/contact', contactRoutes);
+  app.use('/api/footer', footerRoutes);
   app.use('/api/contact-messages', contactMessageRoutes);
+
 
   // Serve uploaded files from backend/public/uploads (one level above src)
   // Serve uploaded files and allow cross-origin embedding from the frontend
