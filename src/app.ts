@@ -20,6 +20,9 @@ import { logger } from './utils/logger';
 import { connectDatabase } from './config/database';
 import path from 'path';
 
+import contactMessageRoutes from './routes/contactMessageRoutes';
+import ContactMessage from './models/ContactMessage';
+
 dotenv.config();
 
 export const createApp = () => {
@@ -149,6 +152,8 @@ app.use(cors({
   app.use('/api/apartment-details', apartmentDetailRoutes);
   app.use('/api/room-details', roomDetailRoutes);
   app.use('/api/contact', contactRoutes);
+  app.use('/api/contact-messages', contactMessageRoutes);
+
   // Serve uploaded files from backend/public/uploads (one level above src)
   // Serve uploaded files and allow cross-origin embedding from the frontend
   app.use('/uploads', (req, res, next) => {

@@ -3,7 +3,7 @@ import { logger } from '../utils/logger';
 
 export const connectDatabase = async (): Promise<void> => {
   try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/booking-app';
+    const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://airbnb_user:d4CdJV6T8E8EIJvR@airrbnb-cluster.upznduc.mongodb.net/?appName=airrbnb-cluster';
     const isProduction = process.env.NODE_ENV === 'production';
     
     const mongooseOptions: mongoose.ConnectOptions = {
