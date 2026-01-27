@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import * as Sentry from '@sentry/node';
-import { nodeProfilingIntegration } from '@sentry/profiling-node';
 import paymentRoutes from './routes/payment.routes';
 import reservationRoutes from './routes/reservation.routes';
 import authRoutes from './routes/auth.routes';
@@ -43,9 +42,6 @@ const initSentry = () => {
       dsn: sentryDsn,
       environment: process.env.NODE_ENV || 'development',
       tracesSampleRate: isProduction ? 0.1 : 1.0,
-      integrations: [
-        nodeProfilingIntegration(),
-      ],
       maxBreadcrumbs: 50,
       attachStacktrace: true,
       release: process.env.APP_VERSION || '1.0.0',
