@@ -55,29 +55,50 @@ export const createApp = () => {
   });
   app.use('/api/', limiter);
 
-  // CORS configuration
-  const defaultOrigins = isProduction 
-    ? [] 
-    : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:8080'];
-  const envOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) : [];
-  const allowedOrigins = [...new Set([...envOrigins, ...defaultOrigins])];
+// CORS configuration 
+const defaultOrigins = isProduction 
+  ? [] 
+  : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:8080'];
 
-  logger.info(`✅ CORS allowed origins: ${allowedOrigins.join(', ')}`);
+const envOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) : [];
 
-  app.use(cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        return callback(null, true);
-      }
-      logger.warn(`⚠️  CORS request blocked from origin: ${origin}`);
-      return callback(new Error('CORS not allowed from this origin'));
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-client-info'],
-    maxAge: 86400, // 24 hours
-  }));
+// Ajoutez les patterns regex pour Vercel
+const vercelPatterns = [
+  // Production
+  /^https:\/\/air-frontend-neon\.vercel\.app$/,
+  // Preview URLs de Vercel
+  /^https:\/\/air-frontend-.*-nicolasromaninas-projects\.vercel\.app$/,
+  /^https:\/\/airbnb-.*-nicolasromaninas-projects\.vercel\.app$/,
+  // Lovable app
+  /^https:\/\/.*\.lovable\.app$/,
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Permettre les requêtes sans origine (comme curl, postman)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    // Vérifier les URLs exactes
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+
+    // Vérifier les patterns regex
+    const isAllowedByPattern = vercelPatterns.some(pattern => pattern.test(origin));
+    if (isAllowedByPattern) {
+      return callback(null, true);
+    }
+
+    logger.warn(`⚠️  CORS request blocked from origin: ${origin}`);
+    return callback(new Error('CORS not allowed from this origin'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-client-info'],
+  maxAge: 86400, // 24 hours
+}));
 
   // Increase body size limits to allow larger page payloads (e.g., base64 images)
   app.use(express.json({ limit: process.env.REQUEST_LIMIT || '10mb' }));
