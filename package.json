@@ -9,11 +9,13 @@
     "start": "node dist/index.js",
     "prod": "NODE_ENV=production node dist/index.js",
     "postinstall": "npm run build",
+    "init:deployment": "ts-node-dev scripts/init-deployment.ts",
     "test": "jest",
     "test:mongo": "ts-node-dev scripts/testMongo.ts",
     "test:health": "curl http://localhost:3000/health",
     "seed": "ts-node-dev src/seeds/seed-options.ts",
-    "seed:rooms": "ts-node-dev src/seeds/seed-rooms.ts"
+    "seed:rooms": "ts-node-dev src/seeds/seed-rooms.ts",
+    "create:admin": "ts-node-dev scripts/create-admin.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

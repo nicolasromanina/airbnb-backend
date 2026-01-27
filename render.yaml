@@ -6,7 +6,8 @@ services:
     plan: free
     buildCommand: npm install --include=dev && npm run build
     startCommand: npm start
-    healthCheckPath: /api/health
+    preDeployCommand: npm run init:deployment
+    healthCheckPath: /health
     autoDeploy: true
     envVars:
       - key: NODE_ENV
@@ -43,5 +44,13 @@ services:
         sync: false
       - key: SMTP_PASS
         sync: false
+      - key: ADMIN_EMAIL
+        value: admin@airbnb.local
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_FIRST_NAME
+        value: Admin
+      - key: ADMIN_LAST_NAME
+        value: User
       - key: FRONTEND_URL
         value: https://air-frontend-neon.vercel.app

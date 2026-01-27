@@ -83,6 +83,15 @@ export const createApp = () => {
   app.use(express.json({ limit: process.env.REQUEST_LIMIT || '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: process.env.REQUEST_LIMIT || '10mb' }));
 
+  // Health check BEFORE logging and database - must respond instantly
+  app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK', service: 'booking-backend' });
+  });
+
+  app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'OK', service: 'booking-backend' });
+  });
+
   // Request logging middleware
   app.use((req, res, next) => {
     logger.info(`${req.method} ${req.url}`, {
@@ -118,10 +127,6 @@ export const createApp = () => {
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
     next();
   }, express.static(path.resolve(__dirname, '..', 'public', 'uploads')));
-
-  app.get('/health', (req, res) => {
-    res.json({ status: 'OK' });
-  });
 
   app.use('*', (req, res) => res.status(404).json({ error: 'Route not found', path: req.originalUrl }));
   app.use(errorHandler);
