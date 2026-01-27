@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 import paymentRoutes from './routes/payment.routes';
 import reservationRoutes from './routes/reservation.routes';
 import authRoutes from './routes/auth.routes';
@@ -19,12 +21,16 @@ import footerRoutes from './routes/footer.routes';
 import { errorHandler } from './middleware/error.middleware';
 import { logger } from './utils/logger';
 import { connectDatabase } from './config/database';
+import { initSentry } from './config/sentry';
 import path from 'path';
 
 import contactMessageRoutes from './routes/contactMessageRoutes';
 import ContactMessage from './models/ContactMessage';
 
 dotenv.config();
+
+// Initialize Sentry early
+initSentry();
 
 export const createApp = () => {
   const app = express();
@@ -39,6 +45,10 @@ export const createApp = () => {
     },
     contentSecurityPolicy: false, // Configure based on your needs
   }));
+
+  // Sentry Request Handler (must be first)
+  app.use(Sentry.Handlers.requestHandler());
+  app.use(Sentry.Handlers.tracingHandler());
 
   // Trust proxy for production (needed for load balancers, reverse proxies)
   if (isProduction) {
@@ -165,6 +175,11 @@ app.use(cors({
   }, express.static(path.resolve(__dirname, '..', 'public', 'uploads')));
 
   app.use('*', (req, res) => res.status(404).json({ error: 'Route not found', path: req.originalUrl }));
+  
+  // Sentry Error Handler (must be last error middleware)
+  app.use(Sentry.Handlers.errorHandler());
+  
+  // Custom error handler
   app.use(errorHandler);
 
   return app;
