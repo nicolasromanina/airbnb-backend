@@ -1,21 +1,17 @@
 import * as Sentry from '@sentry/node';
-import * as Tracing from '@sentry/tracing';
-import dotenv from 'dotenv';
+import { logger } from '../utils/logger';
 
-dotenv.config();
-
-export const initSentry = () => {
+/**
+ * Initialize Sentry for error tracking and performance monitoring
+ * Only activates if SENTRY_DSN is set in environment variables
+ */
+export const initSentry = (): boolean => {
   const sentryDsn = process.env.SENTRY_DSN;
   const isProduction = process.env.NODE_ENV === 'production';
 
-  if (!sentryDsn && isProduction) {
-    console.warn('⚠️ SENTRY_DSN not configured. Error tracking disabled.');
-    return null;
-  }
-
   if (!sentryDsn) {
-    console.log('ℹ️ Sentry DSN not provided. Skipping Sentry initialization.');
-    return null;
+    logger.info('Sentry DSN not provided. Error tracking disabled.');
+    return false;
   }
 
   try {
@@ -23,50 +19,57 @@ export const initSentry = () => {
       dsn: sentryDsn,
       environment: process.env.NODE_ENV || 'development',
       tracesSampleRate: isProduction ? 0.1 : 1.0,
-      integrations: [
-        new Sentry.Integrations.Http({ tracing: true }),
-        new Tracing.Integrations.Express({
-          app: true,
-          request: true,
-          transaction: 'name',
-        }),
-      ],
-      // Performance Monitoring
       maxBreadcrumbs: 50,
       attachStacktrace: true,
-      
-      // Release tracking
       release: process.env.APP_VERSION || '1.0.0',
-      
-      // Before sending - filter sensitive data
       beforeSend(event, hint) {
-        // Don't send health check errors
+        // Filter out health check requests
         if (event.request?.url?.includes('/health')) {
           return null;
         }
-        
         // Remove sensitive headers
         if (event.request?.headers) {
           delete event.request.headers['authorization'];
           delete event.request.headers['cookie'];
         }
-        
         return event;
       },
-      
       denyUrls: [
-        // Browser extensions
         /extensions\//i,
         /^chrome:\/\//i,
       ],
     });
 
-    console.log('✅ Sentry initialized successfully');
-    return Sentry;
+    logger.info('✅ Sentry initialized successfully');
+    return true;
   } catch (error) {
-    console.error('❌ Failed to initialize Sentry:', error);
-    return null;
+    logger.error('Failed to initialize Sentry:', error);
+    return false;
   }
 };
 
-export default Sentry;
+/**
+ * Capture an error in Sentry
+ */
+export const captureError = (error: Error, context?: Record<string, any>) => {
+  if (!process.env.SENTRY_DSN) {
+    return;
+  }
+  
+  if (context) {
+    Sentry.captureException(error, { contexts: { custom: context } });
+  } else {
+    Sentry.captureException(error);
+  }
+};
+
+/**
+ * Capture a message in Sentry
+ */
+export const captureMessage = (message: string, level: 'fatal' | 'error' | 'warning' | 'info' | 'debug' = 'info') => {
+  if (!process.env.SENTRY_DSN) {
+    return;
+  }
+  
+  Sentry.captureMessage(message, level);
+};

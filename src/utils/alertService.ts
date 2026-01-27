@@ -28,27 +28,21 @@ export class AlertService {
       };
 
       const message: SlackMessage = {
+        text: `⚠️ ${severity.toUpperCase()}: ${title}`,
         blocks: [
           {
-            type: 'header',
+            type: 'section',
             text: {
-              type: 'plain_text',
-              text: `🚨 ${title}`
+              type: 'mrkdwn',
+              text: `*${severity.toUpperCase()}*: ${title}`
             }
           },
           {
             type: 'section',
             fields: Object.entries(details).map(([key, value]) => ({
               type: 'mrkdwn',
-              text: `*${key}:*\n${value}`
+              text: `*${key}*\n${value}`
             }))
-          },
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `Severity: ${severity.toUpperCase()}`
-            }
           }
         ]
       };
