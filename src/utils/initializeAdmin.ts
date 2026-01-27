@@ -1,4 +1,3 @@
-import bcrypt from 'bcryptjs';
 import { logger } from './logger';
 import { User } from '../models/User';
 
@@ -18,11 +17,10 @@ export const initializeAdminUser = async (): Promise<void> => {
 
     // Create admin user
     const adminPassword = process.env.ADMIN_PASSWORD || 'AdminPass123!';
-    const hashedPassword = await bcrypt.hash(adminPassword, 12);
-
+    // Password will be hashed by pre('save') hook in User model
     const adminUser = new User({
       email: adminEmail,
-      password: hashedPassword,
+      password: adminPassword,
       firstName: process.env.ADMIN_FIRST_NAME || 'Admin',
       lastName: process.env.ADMIN_LAST_NAME || 'User',
       role: 'superadmin',
@@ -32,7 +30,8 @@ export const initializeAdminUser = async (): Promise<void> => {
     await adminUser.save();
     logger.info(`✅ Admin user created successfully`);
     logger.info(`   📧 Email: ${adminEmail}`);
-    logger.info(`   🔑 Password: Set from environment variable`);
+    logger.info(`   🔑 Use password: ${adminPassword}`);
+    logger.info(`   📌 Password: ${process.env.ADMIN_PASSWORD ? 'Configured' : 'Using DEFAULT'}`);
   } catch (err) {
     // Log warning but don't fail startup
     const message = err instanceof Error ? err.message : String(err);
