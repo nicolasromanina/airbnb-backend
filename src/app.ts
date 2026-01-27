@@ -41,21 +41,7 @@ export const createApp = () => {
     app.set('trust proxy', 1);
   }
 
-  // Rate limiting (stricter in production)
-  const limiter = rateLimit({
-    windowMs: isProduction ? 15 * 60 * 1000 : 15 * 60 * 1000,
-    max: isProduction ? 100 : 500,
-    message: 'Trop de requêtes depuis cette IP, veuillez réessayer plus tard.',
-    standardHeaders: true,
-    legacyHeaders: false,
-    skip: (req) => {
-      // Skip rate limiting for health checks
-      return req.path === '/health';
-    },
-  });
-  app.use('/api/', limiter);
-
-// CORS configuration 
+// CORS configuration (MUST be before rate limiter)
 const defaultOrigins = isProduction 
   ? [] 
   : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:8080'];
@@ -106,6 +92,20 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'x-client-info'],
   maxAge: 86400, // 24 hours
 }));
+
+  // Rate limiting (AFTER CORS so preflight requests can pass through)
+  const limiter = rateLimit({
+    windowMs: isProduction ? 15 * 60 * 1000 : 15 * 60 * 1000,
+    max: isProduction ? 100 : 500,
+    message: 'Trop de requêtes depuis cette IP, veuillez réessayer plus tard.',
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (req) => {
+      // Skip rate limiting for health checks and preflight requests
+      return req.path === '/health' || req.method === 'OPTIONS';
+    },
+  });
+  app.use('/api/', limiter);
 
   // Increase body size limits to allow larger page payloads (e.g., base64 images)
   app.use(express.json({ limit: process.env.REQUEST_LIMIT || '10mb' }));
