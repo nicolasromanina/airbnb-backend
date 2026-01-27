@@ -61,6 +61,9 @@ const defaultOrigins = isProduction
   : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:8080'];
 
 const envOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) : [];
+const allowedOrigins = [...new Set([...envOrigins, ...defaultOrigins])];
+
+logger.info(`✅ CORS allowed origins: ${allowedOrigins.join(', ')}`);
 
 // Ajoutez les patterns regex pour Vercel
 const vercelPatterns = [
