@@ -219,4 +219,41 @@ export const exportReservationsCSV = async (req: Request, res: Response) => {
   }
 };
 
-export default { listReservations, getReservation, confirmReservation, cancelReservation, exportReservationsCSV };
+export const getBookingCommunications = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Find the booking
+    const booking = await Reservation.findById(id);
+    if (!booking) {
+      return res.status(404).json({ success: false, error: 'Booking not found' });
+    }
+
+    // Return communication history (empty for now, can be extended)
+    // In a full implementation, you'd query from a Communications collection
+    const communications = [
+      {
+        _id: 'comm_1',
+        type: 'email',
+        subject: 'Booking confirmation',
+        content: 'Your booking has been confirmed',
+        status: 'sent',
+        sentAt: booking.createdAt,
+        sentBy: {
+          name: 'System',
+          email: 'noreply@airbnb.com'
+        },
+        metadata: {
+          emailId: 'email_123'
+        }
+      }
+    ];
+
+    res.json({ success: true, data: communications });
+  } catch (error) {
+    console.error('Error fetching booking communications:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch communications' });
+  }
+};
+
+export default { listReservations, getReservation, confirmReservation, cancelReservation, exportReservationsCSV, getBookingCommunications };

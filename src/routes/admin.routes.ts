@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'development' || process.env.ALLOW_DEV_SEED === 'tr
 router.get('/bookings', authenticate, authorize('admin','superadmin','manager'), bookingCtrl.listReservations);
 router.get('/bookings/export', authenticate, authorize('admin','superadmin','manager'), bookingCtrl.exportReservationsCSV);
 router.get('/bookings/:id', authenticate, authorize('admin','superadmin','manager'), param('id').isMongoId(), runValidation, bookingCtrl.getReservation);
+router.get('/bookings/:id/communications', authenticate, authorize('admin','superadmin','manager','support'), param('id').isMongoId(), runValidation, bookingCtrl.getBookingCommunications);
 router.post('/bookings/:id/confirm', authenticate, authorize('admin','superadmin','manager'), param('id').isMongoId(), runValidation, bookingCtrl.confirmReservation);
 router.post('/bookings/:id/cancel', authenticate, authorize('admin','superadmin','manager'), param('id').isMongoId(), runValidation, bookingCtrl.cancelReservation);
 
