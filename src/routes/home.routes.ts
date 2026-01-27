@@ -1,11 +1,29 @@
 import { Router } from 'express';
 import homeController from '../controllers/homeController';
 import { authenticate } from '../middleware/auth.middleware';
+import { upload, uploadToCloudinary } from '../middleware/cloudinary.middleware';
 
 const router = Router();
 
 // Routes publiques (lecture seule)
 router.get('/', homeController.getHomePage.bind(homeController));
+
+// Route upload d'images (Cloudinary)
+router.post('/upload', authenticate, upload.single('image'), uploadToCloudinary, (req, res) => {
+  try {
+    if (!req.cloudinaryUrl) {
+      return res.status(400).json({ error: 'Erreur lors du téléchargement vers Cloudinary' });
+    }
+    
+    res.json({ 
+      url: req.cloudinaryUrl, 
+      publicId: req.cloudinaryPublicId,
+      success: true 
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors du traitement de l\'image' });
+  }
+});
 
 // Routes protégées (édition)
 router.put('/', authenticate, homeController.updateHomePage.bind(homeController));
