@@ -83,7 +83,7 @@ router.post(
 );
 
 // Supprimer une image
-router.delete('/gallery/:imageId', authenticate, footerController.deleteGalleryImage.bind(footerController));
+router.delete('/gallery/:id', authenticate, footerController.deleteGalleryImage.bind(footerController));
 
 // Mettre à jour l'ordre
 router.put('/gallery/order', authenticate, footerController.updateGalleryOrder.bind(footerController));

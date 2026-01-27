@@ -117,11 +117,11 @@ class FooterController {
   // Supprimer une image de la galerie
   async deleteGalleryImage(req: Request, res: Response): Promise<void> {
     try {
-      const { imageId } = req.params;
+      const { id } = req.params;
       const updatedBy = (req as any).user?.email || 'anonymous';
 
       // Récupérer le footer pour obtenir le public_id
-      const footer = await Footer.findOne({ 'galleryImages._id': imageId });
+      const footer = await Footer.findOne({ 'galleryImages._id': id });
       
       if (!footer) {
         res.status(404).json({ error: 'Image non trouvée' });
@@ -129,7 +129,7 @@ class FooterController {
       }
 
       // Trouver l'image à supprimer
-      const imageToDelete = footer.galleryImages.find(img => img._id && img._id.toString() === imageId);
+      const imageToDelete = footer.galleryImages.find(img => img._id && img._id.toString() === id);
       
       if (!imageToDelete) {
         res.status(404).json({ error: 'Image non trouvée' });
@@ -147,7 +147,7 @@ class FooterController {
       const updatedFooter = await Footer.findOneAndUpdate(
         {},
         {
-          $pull: { galleryImages: { _id: imageId } },
+          $pull: { galleryImages: { _id: id } },
           $inc: { 'meta.version': 1 },
           'meta.updatedAt': new Date(),
           'meta.updatedBy': updatedBy
