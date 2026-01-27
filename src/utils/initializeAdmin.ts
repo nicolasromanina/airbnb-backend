@@ -1,17 +1,12 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { logger } from './logger';
+import { User } from '../models/User';
 
 /**
  * Initialize default admin user after database is connected
  */
 export const initializeAdminUser = async (): Promise<void> => {
   try {
-    // Wait a moment for models to be registered
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Get User model
-    const User = mongoose.model('User');
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@airbnb.local';
 
     // Check if admin already exists

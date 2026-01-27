@@ -3,6 +3,8 @@ import createApp from './app';
 import { logger } from './utils/logger';
 import { initializeAdminUser } from './utils/initializeAdmin';
 import mongoose from 'mongoose';
+// Import all models to register them with Mongoose
+import { User } from './models/User';
 
 // Load environment variables
 dotenv.config();
