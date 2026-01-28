@@ -8,11 +8,17 @@ export class SearchController {
   async searchApartments(req: Request, res: Response) {
     try {
       const {
+        destination,
+        city,
+        country,
         location,
         minPrice,
         maxPrice,
         minCapacity,
         amenities,
+        checkIn,
+        availableFrom,
+        travelers,
         sortBy = 'popularity',
         page = 1,
         limit = 12
@@ -21,15 +27,43 @@ export class SearchController {
       // Build filter query
       const filter: any = {};
 
-      // Location filter
+      // Destination or City/Country filter - support both names and exact city/country
+      const destinationFilters: any[] = [];
+      
+      if (destination && typeof destination === 'string' && destination.trim()) {
+        const destRegex = new RegExp(destination.trim(), 'i');
+        destinationFilters.push(
+          { city: destRegex },
+          { country: destRegex },
+          { location: destRegex },
+          { title: destRegex },
+          { description: destRegex }
+        );
+      }
+      
+      if (city && typeof city === 'string' && city.trim()) {
+        const cityRegex = new RegExp(city.trim(), 'i');
+        destinationFilters.push(
+          { city: cityRegex }
+        );
+      }
+      
+      if (country && typeof country === 'string' && country.trim()) {
+        const countryRegex = new RegExp(country.trim(), 'i');
+        destinationFilters.push(
+          { country: countryRegex }
+        );
+      }
+      
       if (location && typeof location === 'string' && location.trim()) {
-        const locationRegex = new RegExp(location, 'i');
-        filter.$or = [
-          { city: locationRegex },
-          { location: locationRegex },
-          { title: locationRegex },
-          { description: locationRegex }
-        ];
+        const locRegex = new RegExp(location.trim(), 'i');
+        destinationFilters.push(
+          { location: locRegex }
+        );
+      }
+
+      if (destinationFilters.length > 0) {
+        filter.$or = destinationFilters;
       }
 
       // Price filter
@@ -39,22 +73,29 @@ export class SearchController {
         if (maxPrice) filter.price.$lte = parseFloat(maxPrice as string);
       }
 
-      // Capacity filter
-      if (minCapacity) {
-        // Try to parse capacity from guests string (e.g., "until 4 guests" -> 4)
-        filter.$expr = {
-          $gte: [
-            {
-              $toInt: {
-                $regexFind: {
-                  input: '$guests',
-                  regex: '[0-9]+'
+      // Capacity/Travelers filter
+      if (minCapacity || travelers) {
+        const requiredCapacity = minCapacity ? parseInt(minCapacity as string) : (travelers ? parseInt(travelers as string) : null);
+        if (requiredCapacity) {
+          filter.$expr = {
+            $gte: [
+              {
+                $toInt: {
+                  $arrayElemAt: [
+                    {
+                      $regexFindAll: {
+                        input: '$guests',
+                        regex: '[0-9]+'
+                      }
+                    },
+                    0
+                  ]
                 }
-              }
-            },
-            parseInt(minCapacity as string)
-          ]
-        };
+              },
+              requiredCapacity
+            ]
+          };
+        }
       }
 
       // Amenities filter
@@ -62,6 +103,37 @@ export class SearchController {
         const amenitiesArray = amenities.split(',').map(a => a.trim());
         filter.amenities = { $in: amenitiesArray };
       }
+
+      // Check-in date availability filter
+      if (checkIn && typeof checkIn === 'string') {
+        const checkInDate = new Date(checkIn);
+        filter.$or = filter.$or ? [...filter.$or, {
+          availableFrom: { $lte: checkInDate }
+        }, {
+          availableFrom: { $exists: false }
+        }] : [{
+          availableFrom: { $lte: checkInDate }
+        }, {
+          availableFrom: { $exists: false }
+        }];
+      }
+
+      // Available from filter
+      if (availableFrom && typeof availableFrom === 'string') {
+        const availableFromDate = new Date(availableFrom);
+        filter.$or = filter.$or ? [...filter.$or, {
+          availableFrom: { $lte: availableFromDate }
+        }, {
+          availableFrom: { $exists: false }
+        }] : [{
+          availableFrom: { $lte: availableFromDate }
+        }, {
+          availableFrom: { $exists: false }
+        }];
+      }
+
+      // Availability status filter
+      filter.availability = { $ne: false };
 
       // Setup sort
       let sortOption: any = { 'meta.popularity': -1 };
@@ -268,6 +340,24 @@ export class SearchController {
         )
       ] as string[];
 
+      // Extract unique countries
+      const countries = [
+        ...new Set(
+          apartments
+            .filter((apt) => apt.country)
+            .map((apt) => apt.country)
+        )
+      ] as string[];
+
+      // Extract unique cities
+      const cities = [
+        ...new Set(
+          apartments
+            .filter((apt) => apt.city)
+            .map((apt) => apt.city)
+        )
+      ] as string[];
+
       // Get price range
       const priceStats = await RoomDetail.aggregate([
         {
@@ -314,6 +404,8 @@ export class SearchController {
 
       res.json({
         locations: locations.sort(),
+        cities: cities.sort(),
+        countries: countries.sort(),
         priceRange: priceStats[0] || { minPrice: 0, maxPrice: 0 },
         amenities: Array.from(amenitiesSet).sort(),
         capacityRange: capacityStats[0] || { minCapacity: 1, maxCapacity: 10 }
