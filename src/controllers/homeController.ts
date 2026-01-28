@@ -162,6 +162,7 @@ class HomeController {
       },
       welcomeSection: {
         videoImage: '/assets/video-bg-welcome.png',
+        videoUrl: '',
         image1: '/assets/photo-welcome1.png',
         image2: '/assets/photo-welcome2.png',
         title: 'Welcome to lorem consectetur',
@@ -223,6 +224,7 @@ class HomeController {
         title: 'Adipiscing elit amet, consectetur.',
         description: 'Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
         mainImage: '/assets/bedroom-main.png',
+        videoUrl: '',
         galleryImages: [
           '/assets/image-above.png',
           '/assets/image-center.png',

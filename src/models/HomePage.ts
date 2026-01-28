@@ -23,6 +23,7 @@ export interface IHeroSection {
 
 export interface IWelcomeSection {
   videoImage: string;
+  videoUrl: string;
   image1: string;
   image2: string;
   title: string;
@@ -76,6 +77,7 @@ export interface IVideoSection {
   title: string;
   description: string;
   mainImage: string;
+  videoUrl: string;
   galleryImages: string[];
   buttonText: string;
   accentColor: string;
@@ -202,6 +204,7 @@ const HeroSectionSchema = new Schema<IHeroSection>({
 // Schéma Welcome Section
 const WelcomeSectionSchema = new Schema<IWelcomeSection>({
   videoImage: { type: String, required: true },
+  videoUrl: { type: String, default: '' },
   image1: { type: String, required: true },
   image2: { type: String, required: true },
   title: { type: String, required: true },
@@ -261,6 +264,7 @@ const VideoSectionSchema = new Schema<IVideoSection>({
   title: { type: String, required: true },
   description: { type: String, required: true },
   mainImage: { type: String, required: true },
+  videoUrl: { type: String, default: '' },
   galleryImages: [{ type: String }],
   buttonText: { type: String, default: 'Réserver maintenant' },
   accentColor: { type: String, default: '#FF1B7C' }
