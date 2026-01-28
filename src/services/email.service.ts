@@ -426,6 +426,404 @@ Cet email a été envoyé automatiquement.
       return false;
     }
   }
+
+  async sendCancellationConfirmationEmail(
+    to: string,
+    reservationData: {
+      id: string;
+      title: string;
+      apartmentNumber?: string;
+      checkIn: Date;
+      checkOut: Date;
+      totalPrice: number;
+      refundAmount?: number;
+      refundPercentage?: number;
+      cancellationReason?: string;
+    }
+  ) {
+    const checkInDate = new Date(reservationData.checkIn).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    const checkOutDate = new Date(reservationData.checkOut).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #f8d7da; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
+          .header h1 { color: #721c24; margin: 0; font-size: 24px; }
+          .content { background: #fff; padding: 30px; border: 1px solid #f5c6cb; border-top: none; }
+          .section { margin-bottom: 25px; }
+          .section-title { font-weight: bold; color: #495057; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; }
+          .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+          .info-label { font-weight: bold; color: #6c757d; }
+          .info-value { color: #212529; text-align: right; }
+          .refund-box { background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0; border-radius: 4px; }
+          .refund-amount { font-size: 24px; font-weight: bold; color: #28a745; }
+          .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6; color: #6c757d; font-size: 12px; }
+          .button { display: inline-block; background: #721c24; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; margin: 15px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>❌ Annulation Confirmée</h1>
+          </div>
+          <div class="content">
+            <p>Bonjour,</p>
+            <p>Votre annulation de réservation a bien été enregistrée et traitée avec succès.</p>
+
+            <div class="section">
+              <div class="section-title">📋 Détails de l'Annulation</div>
+              <div class="info-row">
+                <span class="info-label">Numéro de réservation:</span>
+                <span class="info-value">#${reservationData.id}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Logement:</span>
+                <span class="info-value">${reservationData.title}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Dates annulées:</span>
+                <span class="info-value">${checkInDate} - ${checkOutDate}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Raison:</span>
+                <span class="info-value">${reservationData.cancellationReason || 'Non spécifiée'}</span>
+              </div>
+            </div>
+
+            <div class="refund-box">
+              <div class="section-title">💰 Remboursement</div>
+              <div style="margin-bottom: 10px;">
+                <span style="color: #666;">Montant original:</span>
+                <strong>€${reservationData.totalPrice.toFixed(2)}</strong>
+              </div>
+              <div style="margin-bottom: 10px;">
+                <span style="color: #666;">Pourcentage remboursé:</span>
+                <strong>${reservationData.refundPercentage || 0}%</strong>
+              </div>
+              <div style="border-top: 2px solid #28a745; padding-top: 10px;">
+                <span style="color: #666;">Montant remboursé:</span>
+                <div class="refund-amount">€${(reservationData.refundAmount || 0).toFixed(2)}</div>
+              </div>
+              <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                Le remboursement sera traité sous 5-7 jours ouvrables vers votre compte bancaire d'origine.
+              </p>
+            </div>
+
+            <div class="section">
+              <p style="color: #6c757d; font-size: 14px;">
+                Si vous avez des questions concernant cette annulation ou votre remboursement, 
+                n'hésitez pas à nous contacter.
+              </p>
+            </div>
+
+            <div class="footer">
+              Support Client:<br>
+              Email: ${process.env.CONTACT_EMAIL || 'contact@example.com'}<br>
+              Téléphone: ${process.env.CONTACT_PHONE || '+33 00 00 000'}<br><br>
+              © ${new Date().getFullYear()} ${process.env.COMPANY_NAME || 'Notre Société'}. Tous droits réservés.
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const mailOptions: EmailOptions = {
+      to,
+      subject: `Annulation Confirmée - Réservation #${reservationData.id}`,
+      html
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      console.log('Cancellation confirmation email sent to', to);
+      return true;
+    } catch (error) {
+      console.error('Error sending cancellation confirmation email:', error);
+      return false;
+    }
+  }
+
+  async sendEarlyCheckoutEmail(
+    to: string,
+    reservationData: {
+      id: string;
+      title: string;
+      apartmentNumber?: string;
+      checkIn: Date;
+      checkOut: Date;
+      actualCheckoutDate: Date;
+      totalPrice: number;
+      refundAmount?: number;
+      refundPercentage?: number;
+      earlyCheckoutReason?: string;
+    }
+  ) {
+    const checkInDate = new Date(reservationData.checkIn).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    const originalCheckOutDate = new Date(reservationData.checkOut).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    const actualCheckOutDate = new Date(reservationData.actualCheckoutDate).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #fff3cd; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
+          .header h1 { color: #856404; margin: 0; font-size: 24px; }
+          .content { background: #fff; padding: 30px; border: 1px solid #ffeaa7; border-top: none; }
+          .section { margin-bottom: 25px; }
+          .section-title { font-weight: bold; color: #495057; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; }
+          .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+          .info-label { font-weight: bold; color: #6c757d; }
+          .info-value { color: #212529; text-align: right; }
+          .refund-box { background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin: 15px 0; border-radius: 4px; }
+          .refund-amount { font-size: 24px; font-weight: bold; color: #17a2b8; }
+          .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6; color: #6c757d; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>⏰ Départ Anticipé Confirmé</h1>
+          </div>
+          <div class="content">
+            <p>Bonjour,</p>
+            <p>Nous avons bien enregistré votre départ anticipé de la réservation.</p>
+
+            <div class="section">
+              <div class="section-title">📋 Détails du Séjour</div>
+              <div class="info-row">
+                <span class="info-label">Numéro de réservation:</span>
+                <span class="info-value">#${reservationData.id}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Logement:</span>
+                <span class="info-value">${reservationData.title}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Arrivée:</span>
+                <span class="info-value">${checkInDate}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Départ prévu:</span>
+                <span class="info-value">${originalCheckOutDate}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Départ réel:</span>
+                <span class="info-value" style="color: #17a2b8; font-weight: bold;">${actualCheckOutDate}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Raison:</span>
+                <span class="info-value">${reservationData.earlyCheckoutReason || 'Non spécifiée'}</span>
+              </div>
+            </div>
+
+            <div class="refund-box">
+              <div class="section-title">💰 Remboursement Partiel</div>
+              <div style="margin-bottom: 10px;">
+                <span style="color: #666;">Montant original:</span>
+                <strong>€${reservationData.totalPrice.toFixed(2)}</strong>
+              </div>
+              <div style="margin-bottom: 10px;">
+                <span style="color: #666;">Jours utilisés:</span>
+                <strong>${Math.ceil((new Date(reservationData.actualCheckoutDate).getTime() - new Date(reservationData.checkIn).getTime()) / (1000 * 60 * 60 * 24))} jours</strong>
+              </div>
+              <div style="margin-bottom: 10px;">
+                <span style="color: #666;">Remboursement (jours restants):</span>
+                <strong>${reservationData.refundPercentage || 0}%</strong>
+              </div>
+              <div style="border-top: 2px solid #17a2b8; padding-top: 10px;">
+                <span style="color: #666;">Montant remboursé:</span>
+                <div class="refund-amount">€${(reservationData.refundAmount || 0).toFixed(2)}</div>
+              </div>
+              <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                Le remboursement sera traité sous 5-7 jours ouvrables vers votre compte bancaire d'origine.
+              </p>
+            </div>
+
+            <div class="section">
+              <p style="background: #f8f9fa; padding: 15px; border-radius: 4px; color: #666;">
+                Merci de votre séjour! Nous espérons vous revoir bientôt.
+                <br><br>
+                Si vous avez des questions, n'hésitez pas à nous contacter.
+              </p>
+            </div>
+
+            <div class="footer">
+              Support Client:<br>
+              Email: ${process.env.CONTACT_EMAIL || 'contact@example.com'}<br>
+              Téléphone: ${process.env.CONTACT_PHONE || '+33 00 00 000'}<br><br>
+              © ${new Date().getFullYear()} ${process.env.COMPANY_NAME || 'Notre Société'}. Tous droits réservés.
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const mailOptions: EmailOptions = {
+      to,
+      subject: `Départ Anticipé - Réservation #${reservationData.id}`,
+      html
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      console.log('Early checkout email sent to', to);
+      return true;
+    } catch (error) {
+      console.error('Error sending early checkout email:', error);
+      return false;
+    }
+  }
+
+  async sendDisputeNotificationEmail(
+    to: string,
+    reservationData: {
+      id: string;
+      title: string;
+      apartmentNumber?: string;
+      checkIn: Date;
+      checkOut: Date;
+      totalPrice: number;
+      disputeReason: string;
+    }
+  ) {
+    const checkInDate = new Date(reservationData.checkIn).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    const checkOutDate = new Date(reservationData.checkOut).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #f8d7da; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
+          .header h1 { color: #721c24; margin: 0; font-size: 24px; }
+          .content { background: #fff; padding: 30px; border: 1px solid #f5c6cb; border-top: none; }
+          .section { margin-bottom: 25px; }
+          .section-title { font-weight: bold; color: #495057; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; }
+          .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+          .info-label { font-weight: bold; color: #6c757d; }
+          .info-value { color: #212529; text-align: right; }
+          .alert-box { background: #f8d7da; border-left: 4px solid #721c24; padding: 15px; margin: 15px 0; border-radius: 4px; }
+          .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6; color: #6c757d; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>⚠️ Litige Signalé</h1>
+          </div>
+          <div class="content">
+            <p>Bonjour,</p>
+            <p>Nous avons reçu votre signalement concernant votre réservation. 
+              Un membre de notre équipe vous contactera dans les 24 heures pour discuter de votre situation.</p>
+
+            <div class="section">
+              <div class="section-title">📋 Informations du Litige</div>
+              <div class="info-row">
+                <span class="info-label">Numéro de réservation:</span>
+                <span class="info-value">#${reservationData.id}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Logement:</span>
+                <span class="info-value">${reservationData.title}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Dates:</span>
+                <span class="info-value">${checkInDate} - ${checkOutDate}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Montant de la réservation:</span>
+                <span class="info-value">€${reservationData.totalPrice.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <div class="alert-box">
+              <div class="section-title">📝 Raison du Litige</div>
+              <p>${reservationData.disputeReason}</p>
+            </div>
+
+            <div class="section">
+              <p style="background: #f8f9fa; padding: 15px; border-radius: 4px; color: #666;">
+                <strong>Que se passe-t-il maintenant?</strong><br><br>
+                1️⃣ Notre équipe examinera votre plainte<br>
+                2️⃣ Nous pourrons vous contacter pour plus de détails<br>
+                3️⃣ Nous travaillerons à une résolution équitable<br>
+                4️⃣ Vous recevrez une réponse définitive sous 7 jours
+              </p>
+            </div>
+
+            <div class="section">
+              <p style="color: #6c757d; font-size: 14px;">
+                Numéro de dossier: <strong>#${reservationData.id}-DISPUTE</strong><br>
+                Veuillez utiliser ce numéro pour toute correspondance ultérieure.
+              </p>
+            </div>
+
+            <div class="footer">
+              Support Client:<br>
+              Email: ${process.env.CONTACT_EMAIL || 'contact@example.com'}<br>
+              Téléphone: ${process.env.CONTACT_PHONE || '+33 00 00 000'}<br><br>
+              © ${new Date().getFullYear()} ${process.env.COMPANY_NAME || 'Notre Société'}. Tous droits réservés.
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const mailOptions: EmailOptions = {
+      to,
+      subject: `Litige Reçu - Réservation #${reservationData.id}`,
+      html
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      console.log('Dispute notification email sent to', to);
+      return true;
+    } catch (error) {
+      console.error('Error sending dispute notification email:', error);
+      return false;
+    }
+  }
 }
 
 export default new EmailService();

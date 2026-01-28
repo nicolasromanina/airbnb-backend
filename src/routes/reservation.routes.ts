@@ -34,6 +34,32 @@ router.put(
   reservationController.updateReservationStatus
 );
 
+// Reservation action endpoints
+router.post(
+  '/:id/cancel',
+  authenticate,
+  reservationController.cancelReservation
+);
+
+router.post(
+  '/:id/early-checkout',
+  authenticate,
+  reservationController.requestEarlyCheckout
+);
+
+router.post(
+  '/:id/modify',
+  authenticate,
+  reservationController.modifyReservation
+);
+
+router.post(
+  '/:id/dispute',
+  authenticate,
+  reservationController.raiseDispute
+);
+
+// Legacy delete endpoint
 router.delete(
   '/:id/cancel',
   authenticate,

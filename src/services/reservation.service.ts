@@ -240,8 +240,41 @@ export class ReservationService {
     }
   }
 
-  async cancelReservation(id: string, userId: string) {
-    logStep('CANCEL_RESERVATION', { id, userId });
+  /**
+   * Determine if guest is currently checked in
+   */
+  isCheckedIn(reservation: any): boolean {
+    const now = new Date();
+    const checkIn = new Date(reservation.checkIn);
+    const checkOut = new Date(reservation.checkOut);
+    return now >= checkIn && now < checkOut;
+  }
+
+  /**
+   * Determine if guest can still be refunded based on timing
+   */
+  calculateRefundPercentage(reservation: any): number {
+    const now = new Date();
+    const checkIn = new Date(reservation.checkIn);
+    const hoursUntilCheckIn = (checkIn.getTime() - now.getTime()) / (1000 * 60 * 60);
+
+    if (hoursUntilCheckIn >= 48) return 100; // Full refund if >48 hours before check-in
+    if (hoursUntilCheckIn >= 24) return 50;  // 50% refund if 24-48 hours
+    if (hoursUntilCheckIn > 0) return 0;     // No refund if <24 hours before check-in
+    
+    // If guest is checked in or past check-in, partial refund for early checkout
+    const checkOut = new Date(reservation.checkOut);
+    const daysRemaining = (checkOut.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
+    const totalDays = (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24);
+    
+    return Math.max(0, Math.round((daysRemaining / totalDays) * 100));
+  }
+
+  /**
+   * Request cancellation of a reservation (before check-in)
+   */
+  async requestCancellation(id: string, userId: string, reason?: string) {
+    logStep('REQUEST_CANCELLATION', { id, userId, reason });
     
     try {
       const reservation = await Reservation.findOne({
@@ -254,6 +287,14 @@ export class ReservationService {
         throw new Error('Reservation not found or cannot be cancelled');
       }
 
+      // If guest is already checked in, deny cancellation
+      if (this.isCheckedIn(reservation)) {
+        throw new Error(
+          'Guest is already checked in. Cannot cancel. ' +
+          'Please use early checkout if guest wants to leave early.'
+        );
+      }
+
       // Check if check-in is within 24 hours
       const now = new Date();
       const checkIn = new Date(reservation.checkIn);
@@ -263,25 +304,212 @@ export class ReservationService {
         throw new Error('Cannot cancel reservation less than 24 hours before check-in');
       }
 
+      // Calculate refund percentage
+      const refundPercentage = this.calculateRefundPercentage(reservation);
+      const totalPrice = reservation.totalPrice;
+      const refundAmount = (totalPrice * refundPercentage) / 100;
+
+      // Update reservation with cancellation details
       reservation.status = 'cancelled';
+      reservation.actionType = 'cancellation';
+      reservation.cancellationReason = reason || 'No reason provided';
+      reservation.cancellationRequestedAt = now;
+      reservation.refundPercentage = refundPercentage;
+      reservation.refundAmount = refundAmount;
       await reservation.save();
 
-      // If there's a payment, mark it as refunded if applicable
+      // Process refund in payment
       if (reservation.payment) {
         const payment = await Payment.findById(reservation.payment);
-        if (payment && payment.status === 'paid' && hoursUntilCheckIn >= 24) {
+        if (payment && payment.status === 'paid') {
           payment.status = 'refunded';
-          payment.refundedAt = new Date();
-          payment.refundReason = 'Reservation cancelled by customer';
+          payment.refundedAt = now;
+          payment.refundReason = `Cancellation: ${reason || 'Customer requested'}`;
           await payment.save();
         }
       }
 
-      logStep('RESERVATION_CANCELLED', { id });
-
+      logStep('CANCELLATION_REQUESTED', { id, refundPercentage, refundAmount });
       return reservation;
     } catch (error) {
-      logger.error('Error cancelling reservation:', error);
+      logger.error('Error requesting cancellation:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Process early checkout (guest leaves before checkout date)
+   */
+  async processEarlyCheckout(id: string, userId: string, reason?: string) {
+    logStep('PROCESS_EARLY_CHECKOUT', { id, userId, reason });
+    
+    try {
+      const reservation = await Reservation.findOne({
+        _id: id,
+        user: userId,
+        status: 'confirmed'
+      });
+
+      if (!reservation) {
+        throw new Error('Reservation not found');
+      }
+
+      // Verify guest is checked in
+      if (!this.isCheckedIn(reservation)) {
+        throw new Error(
+          'Guest is not checked in yet or already checked out. ' +
+          'Cannot process early checkout.'
+        );
+      }
+
+      const now = new Date();
+      const refundPercentage = this.calculateRefundPercentage(reservation);
+      const totalPrice = reservation.totalPrice;
+      const refundAmount = (totalPrice * refundPercentage) / 100;
+
+      // Update reservation
+      reservation.status = 'early_checkout';
+      reservation.actionType = 'early_checkout';
+      reservation.actualCheckoutDate = now;
+      reservation.earlyCheckoutReason = reason || 'Guest requested early departure';
+      reservation.refundPercentage = refundPercentage;
+      reservation.refundAmount = refundAmount;
+      await reservation.save();
+
+      // Process refund if applicable
+      if (refundPercentage > 0 && reservation.payment) {
+        const payment = await Payment.findById(reservation.payment);
+        if (payment && payment.status === 'paid') {
+          payment.status = 'refunded';
+          payment.refundedAt = now;
+          payment.refundReason = `Early checkout: ${reason || 'Guest requested early departure'}`;
+          await payment.save();
+        }
+      }
+
+      logStep('EARLY_CHECKOUT_PROCESSED', { id, refundPercentage, refundAmount });
+      return reservation;
+    } catch (error) {
+      logger.error('Error processing early checkout:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Modify reservation dates
+   */
+  async modifyReservation(
+    id: string,
+    userId: string,
+    newCheckIn?: Date,
+    newCheckOut?: Date,
+    reason?: string
+  ) {
+    logStep('MODIFY_RESERVATION', { id, userId, newCheckIn, newCheckOut });
+    
+    try {
+      const reservation = await Reservation.findOne({
+        _id: id,
+        user: userId
+      });
+
+      if (!reservation) {
+        throw new Error('Reservation not found');
+      }
+
+      // Cannot modify if guest is checked in (unless it's extension)
+      const now = new Date();
+      const currentCheckOut = new Date(reservation.checkOut);
+      
+      if (this.isCheckedIn(reservation) && newCheckOut && newCheckOut < currentCheckOut) {
+        throw new Error(
+          'Cannot shorten stay for checked-in guest. Please use early checkout instead.'
+        );
+      }
+
+      // Save original dates
+      const originalCheckOut = reservation.checkOut;
+
+      // Update dates if provided
+      if (newCheckIn) reservation.checkIn = newCheckIn;
+      if (newCheckOut) reservation.checkOut = newCheckOut;
+
+      reservation.actionType = 'modification';
+      reservation.originalCheckOut = originalCheckOut;
+      reservation.modificationReason = reason || 'No reason provided';
+      reservation.modifiedAt = now;
+
+      await reservation.save();
+
+      logStep('RESERVATION_MODIFIED', { id });
+      return reservation;
+    } catch (error) {
+      logger.error('Error modifying reservation:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Raise dispute for a reservation
+   */
+  async raiseDispute(id: string, userId: string, disputeReason: string) {
+    logStep('RAISE_DISPUTE', { id, userId, disputeReason });
+    
+    try {
+      const reservation = await Reservation.findOne({
+        _id: id,
+        user: userId
+      });
+
+      if (!reservation) {
+        throw new Error('Reservation not found');
+      }
+
+      const now = new Date();
+
+      reservation.status = 'dispute';
+      reservation.actionType = 'dispute_resolution';
+      reservation.disputeReason = disputeReason;
+      reservation.disputeResolvedAt = undefined; // Will be set when admin resolves
+      await reservation.save();
+
+      logStep('DISPUTE_RAISED', { id });
+      return reservation;
+    } catch (error) {
+      logger.error('Error raising dispute:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Legacy method: cancelReservation - now dispatches to appropriate method
+   */
+  async cancelReservation(id: string, userId: string) {
+    logStep('CANCEL_RESERVATION', { id, userId });
+    
+    try {
+      const reservation = await Reservation.findOne({
+        _id: id,
+        user: userId
+      });
+
+      if (!reservation) {
+        throw new Error('Reservation not found');
+      }
+
+      // If guest is checked in, suggest early checkout instead
+      if (this.isCheckedIn(reservation)) {
+        throw new Error(
+          'Cannot cancel: guest is already checked in. ' +
+          'Please use early checkout endpoint instead. ' +
+          'Endpoint: POST /api/reservations/:id/early-checkout'
+        );
+      }
+
+      // Otherwise, process as cancellation
+      return this.requestCancellation(id, userId, 'Cancelled via legacy endpoint');
+    } catch (error) {
+      logger.error('Error in cancelReservation:', error);
       throw error;
     }
   }

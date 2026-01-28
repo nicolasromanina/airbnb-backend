@@ -223,6 +223,7 @@ export class ReservationController {
     try {
       const { id } = req.params;
       const user = req.user;
+      const { reason } = req.body;
 
       if (!user) {
         return res.status(401).json({ error: 'Authentication required' });
@@ -230,22 +231,154 @@ export class ReservationController {
 
       logStep('CANCEL_RESERVATION_REQUEST', {
         reservationId: id,
-        userId: user._id
+        userId: user._id,
+        reason
       });
 
-      const reservation = await reservationService.cancelReservation(id, user._id);
+      const reservation = await reservationService.requestCancellation(id, user._id, reason);
 
       res.json({
         success: true,
         reservation,
-        message: 'Reservation cancelled successfully'
+        message: 'Reservation cancelled successfully',
+        refund: {
+          percentage: reservation.refundPercentage,
+          amount: reservation.refundAmount
+        }
       });
 
     } catch (error: any) {
       logger.error('Cancel reservation error:', error);
       
-      const statusCode = error.statusCode || 500;
+      const statusCode = error.statusCode || 400;
       const message = error.message || 'Failed to cancel reservation';
+      
+      res.status(statusCode).json({ 
+        success: false,
+        error: message
+      });
+    }
+  };
+
+  requestEarlyCheckout = async (req: AuthRequest, res: Response) => {
+    try {
+      const { id } = req.params;
+      const user = req.user;
+      const { reason } = req.body;
+
+      if (!user) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      logStep('EARLY_CHECKOUT_REQUEST', {
+        reservationId: id,
+        userId: user._id,
+        reason
+      });
+
+      const reservation = await reservationService.processEarlyCheckout(id, user._id, reason);
+
+      res.json({
+        success: true,
+        reservation,
+        message: 'Early checkout processed successfully',
+        refund: {
+          percentage: reservation.refundPercentage,
+          amount: reservation.refundAmount
+        }
+      });
+
+    } catch (error: any) {
+      logger.error('Early checkout error:', error);
+      
+      const statusCode = error.statusCode || 400;
+      const message = error.message || 'Failed to process early checkout';
+      
+      res.status(statusCode).json({ 
+        success: false,
+        error: message
+      });
+    }
+  };
+
+  modifyReservation = async (req: AuthRequest, res: Response) => {
+    try {
+      const { id } = req.params;
+      const user = req.user;
+      const { checkIn, checkOut, reason } = req.body;
+
+      if (!user) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      logStep('MODIFY_RESERVATION_REQUEST', {
+        reservationId: id,
+        userId: user._id,
+        checkIn,
+        checkOut,
+        reason
+      });
+
+      const reservation = await reservationService.modifyReservation(
+        id,
+        user._id,
+        checkIn ? new Date(checkIn) : undefined,
+        checkOut ? new Date(checkOut) : undefined,
+        reason
+      );
+
+      res.json({
+        success: true,
+        reservation,
+        message: 'Reservation modified successfully'
+      });
+
+    } catch (error: any) {
+      logger.error('Modify reservation error:', error);
+      
+      const statusCode = error.statusCode || 400;
+      const message = error.message || 'Failed to modify reservation';
+      
+      res.status(statusCode).json({ 
+        success: false,
+        error: message
+      });
+    }
+  };
+
+  raiseDispute = async (req: AuthRequest, res: Response) => {
+    try {
+      const { id } = req.params;
+      const user = req.user;
+      const { disputeReason } = req.body;
+
+      if (!user) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+      if (!disputeReason) {
+        return res.status(400).json({ error: 'Dispute reason is required' });
+      }
+
+      logStep('RAISE_DISPUTE_REQUEST', {
+        reservationId: id,
+        userId: user._id,
+        disputeReason
+      });
+
+      const reservation = await reservationService.raiseDispute(id, user._id, disputeReason);
+
+      res.json({
+        success: true,
+        reservation,
+        message: 'Dispute raised successfully. Our team will review this shortly.'
+      });
+
+    } catch (error: any) {
+      logger.error('Raise dispute error:', error);
+      
+      const statusCode = error.statusCode || 400;
+      const message = error.message || 'Failed to raise dispute';
       
       res.status(statusCode).json({ 
         success: false,

@@ -23,7 +23,28 @@ export interface IReservation extends Document {
   }>;
   additionalOptionsPrice: number;
   payment?: Types.ObjectId;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  // Amélioration: Statuts plus détaillés et réalistes
+  status: 'pending' | 'confirmed' | 'checked_in' | 'completed' | 'cancelled' | 'early_checkout' | 'dispute';
+  // Nouveau: Type d'action pour distinguer annulation vs early checkout vs modification
+  actionType?: 'cancellation' | 'early_checkout' | 'modification' | 'dispute_resolution' | 'checkout';
+  // Nouveau: Raison de l'annulation/early checkout/dispute
+  cancellationReason?: string;
+  cancellationRequestedAt?: Date;
+  // Nouveau: Pour les early checkouts (départ anticipé)
+  actualCheckoutDate?: Date;
+  earlyCheckoutReason?: string;
+  // Nouveau: Pour les disputes
+  disputeReason?: string;
+  disputeResolution?: string;
+  disputeResolvedAt?: Date;
+  // Nouveau: Tracking des modifications
+  originalCheckOut?: Date;
+  modificationReason?: string;
+  modifiedAt?: Date;
+  // Nouveau: Refund info
+  refundAmount?: number;
+  refundPercentage?: number;
+  refundProcessedAt?: Date;
   specialRequests?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -108,10 +129,77 @@ const ReservationSchema = new Schema<IReservation>({
     type: Schema.Types.ObjectId, 
     ref: 'Payment' 
   },
+  // Amélioration: Statuts plus détaillés
   status: {
     type: String,
-    enum: ['pending', 'confirmed', 'cancelled', 'completed'],
+    enum: ['pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'early_checkout', 'dispute'],
     default: 'pending'
+  },
+  // Nouveau: Type d'action
+  actionType: {
+    type: String,
+    enum: ['cancellation', 'early_checkout', 'modification', 'dispute_resolution', 'checkout'],
+    sparse: true
+  },
+  // Nouveau: Raison de l'annulation/early checkout
+  cancellationReason: {
+    type: String,
+    sparse: true
+  },
+  cancellationRequestedAt: {
+    type: Date,
+    sparse: true
+  },
+  // Nouveau: Pour les early checkouts
+  actualCheckoutDate: {
+    type: Date,
+    sparse: true
+  },
+  earlyCheckoutReason: {
+    type: String,
+    sparse: true
+  },
+  // Nouveau: Pour les disputes
+  disputeReason: {
+    type: String,
+    sparse: true
+  },
+  disputeResolution: {
+    type: String,
+    sparse: true
+  },
+  disputeResolvedAt: {
+    type: Date,
+    sparse: true
+  },
+  // Nouveau: Tracking des modifications
+  originalCheckOut: {
+    type: Date,
+    sparse: true
+  },
+  modificationReason: {
+    type: String,
+    sparse: true
+  },
+  modifiedAt: {
+    type: Date,
+    sparse: true
+  },
+  // Nouveau: Refund info
+  refundAmount: {
+    type: Number,
+    min: 0,
+    sparse: true
+  },
+  refundPercentage: {
+    type: Number,
+    min: 0,
+    max: 100,
+    sparse: true
+  },
+  refundProcessedAt: {
+    type: Date,
+    sparse: true
   },
   specialRequests: { 
     type: String 
