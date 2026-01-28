@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import roomDetailController from '../controllers/roomDetailController';
 import { authenticate } from '../middleware/auth.middleware';
-import { upload, uploadToCloudinary } from '../middleware/cloudinary.middleware';
+import { upload, uploadVideo, uploadToCloudinary } from '../middleware/cloudinary.middleware';
 
 const router = Router();
 
@@ -26,6 +26,26 @@ router.post('/upload', authenticate, upload.single('image'), uploadToCloudinary,
     res.status(500).json({ 
       success: false, 
       error: 'Erreur lors du traitement de l\'image' 
+    });
+  }
+});
+
+// Route upload vidéo (Cloudinary)
+router.post('/upload-video', authenticate, uploadVideo.single('video'), uploadToCloudinary, (req, res) => {
+  try {
+    if (!req.cloudinaryUrl) {
+      return res.status(400).json({ success: false, error: 'Erreur lors du téléchargement vers Cloudinary' });
+    }
+    
+    res.json({ 
+      success: true, 
+      url: req.cloudinaryUrl, 
+      publicId: req.cloudinaryPublicId
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: 'Erreur lors du traitement de la vidéo' 
     });
   }
 });

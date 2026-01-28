@@ -11,6 +11,7 @@ export interface IRoomDetail extends Document {
   bedrooms: string;
   images: string[];
   features: string[];
+  videoUrl?: string;
   // Informations générales additionnelles
   accommodationType?: string;
   includes?: string[];
@@ -68,6 +69,11 @@ const RoomDetailSchema = new Schema<IRoomDetail>({
   features: {
     type: [String],
     default: []
+  },
+  videoUrl: {
+    type: String,
+    required: false,
+    default: ''
   },
   accommodationType: {
     type: String,
