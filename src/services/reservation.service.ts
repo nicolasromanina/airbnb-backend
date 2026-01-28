@@ -1,5 +1,7 @@
 import { Reservation, IReservation } from '../models/Reservation';
 import { Payment } from '../models/Payment';
+import { User, IUser } from '../models/User';
+import emailService from './email.service';
 import { logger, logStep } from '../utils/logger';
 import { Types } from 'mongoose';
 
@@ -105,6 +107,56 @@ export class ReservationService {
         reservationId: reservation._id,
         status: reservation.status 
       });
+
+      // Envoyer l'email de confirmation automatiquement
+      try {
+        // Récupérer les informations de l'utilisateur
+        const user = await User.findById(reservationData.user) as IUser | null;
+        
+        if (user && user.email) {
+          logStep('SENDING_RESERVATION_EMAIL', { 
+            reservationId: reservation._id,
+            userEmail: user.email 
+          });
+
+          await emailService.sendReservationConfirmationEmail(user.email, {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            title: reservationData.title || 'Réservation',
+            apartmentNumber: reservationData.apartmentNumber || '',
+            checkIn: reservationData.checkIn as Date,
+            checkOut: reservationData.checkOut as Date,
+            nights: reservationData.nights as number,
+            guests: reservationData.guests as number,
+            bedrooms: reservationData.bedrooms as number,
+            totalPrice: reservationData.totalPrice as number,
+            pricePerNight: reservationData.pricePerNight as number,
+            additionalOptionsPrice: reservationData.additionalOptionsPrice as number,
+            additionalOptions: (reservationData.additionalOptions as any[])?.map(opt => ({
+              name: opt.name,
+              price: opt.price,
+              quantity: opt.quantity
+            })) || [],
+            reservationId: reservation._id.toString()
+          });
+
+          logStep('RESERVATION_EMAIL_SENT', { 
+            reservationId: reservation._id,
+            userEmail: user.email 
+          });
+        } else {
+          logger.warn('Could not send reservation email - user or email not found', { 
+            userId: reservationData.user,
+            reservationId: reservation._id 
+          });
+        }
+      } catch (emailError) {
+        logger.error('Error sending reservation email - continuing anyway', { 
+          error: emailError,
+          reservationId: reservation._id 
+        });
+        // Ne pas jeter l'erreur - la réservation est déjà créée
+      }
 
       return reservation;
     } catch (error) {
