@@ -18,6 +18,9 @@ import roomDetailRoutes from './routes/roomDetail.routes';
 import contactRoutes from './routes/contact.routes';
 import footerRoutes from './routes/footer.routes';
 import cmsRoutes from './routes/cms.routes';
+import reviewRoutes from './routes/review.routes';
+import analyticsRoutes from './routes/analytics.routes';
+import searchRoutes from './routes/search.routes';
 import { errorHandler } from './middleware/error.middleware';
 import { logger } from './utils/logger';
 import { connectDatabase } from './config/database';
@@ -208,6 +211,9 @@ app.use(cors({
   app.use('/api/footer', footerRoutes);
   app.use('/api/cms', cmsRoutes);
   app.use('/api/contact-messages', contactMessageRoutes);
+  app.use('/api/reviews', reviewRoutes);
+  app.use('/api/analytics', analyticsRoutes);
+  app.use('/api/search', searchRoutes);
 
 
   // Serve uploaded files from backend/public/uploads (one level above src)

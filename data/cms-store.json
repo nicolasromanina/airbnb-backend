@@ -91,6 +91,9 @@
         "featureRoom",
         "logos"
       ]
+    },
+    "legal": {
+      "html": "<h3>Continuez à rédiger ici vos contenus</h3>"
     }
   },
   "history": {
@@ -3069,6 +3072,22 @@
             "featureRoom",
             "logos"
           ]
+        }
+      }
+    ],
+    "legal": [
+      {
+        "id": 1769603694014,
+        "at": 1769603694014,
+        "data": {
+          "html": "<h3>Continuez à rédiger ici vos contenus</h3>"
+        }
+      },
+      {
+        "id": 1769603648471,
+        "at": 1769603648471,
+        "data": {
+          "html": "<h1>Continuez à rédiger ici vos contenus</h1>"
         }
       }
     ]
