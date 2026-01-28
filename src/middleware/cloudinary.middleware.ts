@@ -11,7 +11,8 @@ cloudinary.config({
 // Use memory storage for multer since we'll upload to Cloudinary
 const storage = multer.memoryStorage();
 
-const fileFilter = (req: any, file: any, cb: any) => {
+// File filter pour les images
+const imageFileFilter = (req: any, file: any, cb: any) => {
   const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
@@ -20,33 +21,62 @@ const fileFilter = (req: any, file: any, cb: any) => {
   }
 };
 
+// File filter pour les vidéos
+const videoFileFilter = (req: any, file: any, cb: any) => {
+  const allowedTypes = ['video/mp4', 'video/webm', 'video/mpeg', 'video/quicktime', 'video/x-msvideo', 'video/x-matroska'];
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Type de vidéo non supporté. Utilisez MP4, WebM, MPEG, MOV ou AVI.'), false);
+  }
+};
+
 export const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB
+    fileSize: 10 * 1024 * 1024 // 10MB pour les images
   },
-  fileFilter: fileFilter
+  fileFilter: imageFileFilter
 });
 
-// Middleware to upload to Cloudinary
+// Multer pour les vidéos (100MB max)
+export const uploadVideo = multer({
+  storage: storage,
+  limits: {
+    fileSize: 100 * 1024 * 1024 // 100MB pour les vidéos
+  },
+  fileFilter: videoFileFilter
+});
+
+// Middleware to upload to Cloudinary (images & videos)
 export const uploadToCloudinary = async (req: any, res: any, next: any) => {
   if (!req.file) {
     return res.status(400).json({ error: 'Aucun fichier téléchargé' });
   }
 
   try {
+    // Déterminer le type de ressource (image ou vidéo)
+    const resourceType = req.file.mimetype.startsWith('video/') ? 'video' : 'image';
+    
     // Create a stream to upload to Cloudinary
     const stream = cloudinary.uploader.upload_stream(
       {
-        folder: 'airbnb-app',
-        resource_type: 'auto',
+        folder: resourceType === 'video' ? 'airbnb-app/videos' : 'airbnb-app',
+        resource_type: resourceType,
         quality: 'auto',
-        fetch_format: 'auto',
+        fetch_format: resourceType === 'video' ? undefined : 'auto',
+        eager_async: true,
+        // Pour les vidéos: codec optimisé
+        ...(resourceType === 'video' && {
+          video_sampling: 5,
+          background_removal: 'cloudinary_ai'
+        })
       },
       (error, result) => {
         if (error) {
+          console.error('Cloudinary upload error:', error);
           return res.status(500).json({ 
-            error: 'Erreur lors du téléchargement vers Cloudinary',
+            error: `Erreur lors du téléchargement vers Cloudinary`,
             details: error.message 
           });
         }
@@ -54,6 +84,7 @@ export const uploadToCloudinary = async (req: any, res: any, next: any) => {
         // Attach the Cloudinary result to the request
         req.cloudinaryUrl = result?.secure_url;
         req.cloudinaryPublicId = result?.public_id;
+        req.resourceType = resourceType;
         next();
       }
     );
@@ -61,8 +92,9 @@ export const uploadToCloudinary = async (req: any, res: any, next: any) => {
     // Write the buffer to the stream
     stream.end(req.file.buffer);
   } catch (error) {
+    console.error('Upload processing error:', error);
     res.status(500).json({ 
-      error: 'Erreur lors du traitement de l\'image',
+      error: `Erreur lors du traitement du fichier`,
       details: error instanceof Error ? error.message : 'Unknown error'
     });
   }
