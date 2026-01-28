@@ -52,6 +52,7 @@ class RoomDetailController {
             guests: "jusqu'à 4 invités",
             bedrooms: "2 chambres à coucher",
             images: [],
+            videoUrl: '',
             features: []
           });
           detail = await defaultDetail.save();
@@ -67,6 +68,7 @@ class RoomDetailController {
             guests: "jusqu'à 4 invités",
             bedrooms: "2 chambres à coucher",
             images: [],
+            videoUrl: '',
             features: []
           } as any;
         }

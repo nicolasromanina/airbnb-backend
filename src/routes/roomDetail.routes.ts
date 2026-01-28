@@ -6,10 +6,7 @@ import { upload, uploadVideo, uploadToCloudinary } from '../middleware/cloudinar
 
 const router = Router();
 
-// Routes publiques (lecture)
-router.get('/', roomDetailController.getAllRoomDetails);
-router.get('/:roomId', roomDetailController.getRoomDetail);
-
+// Routes upload DOIVENT être AVANT les routes dynamiques (:roomId)
 // Route upload d'images (Cloudinary)
 router.post('/upload', authenticate, upload.single('image'), uploadToCloudinary, (req, res) => {
   try {
@@ -49,6 +46,10 @@ router.post('/upload-video', authenticate, uploadVideo.single('video'), uploadTo
     });
   }
 });
+
+// Routes publiques (lecture)
+router.get('/', roomDetailController.getAllRoomDetails);
+router.get('/:roomId', roomDetailController.getRoomDetail);
 
 // Routes protégées (édition)
 router.post('/', authenticate, roomDetailController.createRoomDetail);
