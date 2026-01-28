@@ -23,6 +23,13 @@ export interface IRoomDetail extends Document {
   includes?: string[];
   amenities?: string[];
   selectedOptionIds?: string[];
+  additionalOptions?: {
+    optionId: string;
+    name: string;
+    price: number;
+    quantity: number;
+    pricingType: 'fixed' | 'per_day' | 'per_guest';
+  }[];
   meta?: {
     createdAt?: Date;
     updatedAt?: Date;
@@ -126,6 +133,20 @@ const RoomDetailSchema = new Schema<IRoomDetail>({
   },
   selectedOptionIds: {
     type: [String],
+    default: []
+  },
+  additionalOptions: {
+    type: [{
+      optionId: { type: String, required: true },
+      name: { type: String, required: true },
+      price: { type: Number, required: true },
+      quantity: { type: Number, default: 1 },
+      pricingType: { 
+        type: String, 
+        enum: ['fixed', 'per_day', 'per_guest'],
+        default: 'fixed'
+      }
+    }],
     default: []
   },
   meta: {
