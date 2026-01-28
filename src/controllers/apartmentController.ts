@@ -344,8 +344,10 @@ class ApartmentController {
       },
       videoSection: {
         coverImage: '/assets/video-cover.jpg',
+        videoUrl: '',
         playButtonText: 'Play Tour',
-        overlayColor: 'rgba(0,0,0,0.1)'
+        overlayColor: 'rgba(0,0,0,0.1)',
+        galleryImages: []
       },
       finalSection: {
         title: 'ADIPISCING ELIT AMET, CONSECTETUR.',

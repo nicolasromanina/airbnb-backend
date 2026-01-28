@@ -75,8 +75,10 @@ export interface IMarqueeSection {
 
 export interface IVideoSection {
   coverImage: string;
+  videoUrl: string;
   playButtonText: string;
   overlayColor: string;
+  galleryImages: string[];
 }
 
 export interface IFinalSection {
@@ -242,8 +244,10 @@ const MarqueeSectionSchema = new Schema<IMarqueeSection>({
 // Schéma Video Section
 const VideoSectionSchema = new Schema<IVideoSection>({
   coverImage: { type: String, default: '/assets/video-cover.jpg' },
+  videoUrl: { type: String, default: '' },
   playButtonText: { type: String, default: 'Play Tour' },
-  overlayColor: { type: String, default: 'rgba(0,0,0,0.1)' }
+  overlayColor: { type: String, default: 'rgba(0,0,0,0.1)' },
+  galleryImages: { type: [String], default: [] }
 });
 
 // Schéma Final Section
