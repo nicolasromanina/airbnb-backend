@@ -205,7 +205,7 @@ ReviewSchema.post('save', async function(doc) {
   ]);
 
   if (stats.length > 0) {
-    const { RoomDetail } = await import('./RoomDetail');
+    const RoomDetail = (await import('./RoomDetail')).default;
     await RoomDetail.findOneAndUpdate(
       { roomId: doc.apartment.id },
       {

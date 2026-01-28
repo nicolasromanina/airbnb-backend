@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Review, IReview } from '../models/Review';
 import { Reservation } from '../models/Reservation';
 import { User } from '../models/User';
-import { RoomDetail } from '../models/RoomDetail';
+import RoomDetail from '../models/RoomDetail';
 
 export class ReviewController {
   // Create a new review for a reservation
@@ -163,11 +163,11 @@ export class ReviewController {
 
       review.response = {
         text,
-        author: userId,
+        author: userId as any,
         authorName: (req as any).user.name || (req as any).user.email,
         createdAt: new Date(),
         updatedAt: new Date()
-      };
+      } as any;
 
       await review.save();
 

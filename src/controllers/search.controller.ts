@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RoomDetail } from '../models/RoomDetail';
+import RoomDetail from '../models/RoomDetail';
 import { Review } from '../models/Review';
 import { Availability } from '../models/Availability';
 
@@ -91,7 +91,7 @@ export class SearchController {
 
       // Enrich with review data
       const enrichedApartments = await Promise.all(
-        apartments.map(async (apt) => {
+        apartments.map(async (apt: any) => {
           const reviews = await Review.find({
             'apartment.id': apt.roomId,
             status: 'approved'
@@ -281,9 +281,9 @@ export class SearchController {
 
       // Extract unique amenities
       const amenitiesSet = new Set<string>();
-      apartments.forEach((apt) => {
+      apartments.forEach((apt: any) => {
         if (apt.amenities && Array.isArray(apt.amenities)) {
-          apt.amenities.forEach((amenity) => amenitiesSet.add(amenity));
+          apt.amenities.forEach((amenity: any) => amenitiesSet.add(amenity));
         }
       });
 
