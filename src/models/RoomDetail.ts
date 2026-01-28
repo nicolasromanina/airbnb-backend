@@ -29,6 +29,7 @@ export interface IRoomDetail extends Document {
     price: number;
     quantity: number;
     pricingType: 'fixed' | 'per_day' | 'per_guest';
+    image?: string;
   }[];
   meta?: {
     createdAt?: Date;
@@ -145,7 +146,8 @@ const RoomDetailSchema = new Schema<IRoomDetail>({
         type: String, 
         enum: ['fixed', 'per_day', 'per_guest'],
         default: 'fixed'
-      }
+      },
+      image: { type: String, default: null }
     }],
     default: []
   },
