@@ -17,6 +17,7 @@ import apartmentDetailRoutes from './routes/apartmentDetail.routes';
 import roomDetailRoutes from './routes/roomDetail.routes';
 import contactRoutes from './routes/contact.routes';
 import footerRoutes from './routes/footer.routes';
+import cmsRoutes from './routes/cms.routes';
 import { errorHandler } from './middleware/error.middleware';
 import { logger } from './utils/logger';
 import { connectDatabase } from './config/database';
@@ -205,6 +206,7 @@ app.use(cors({
   app.use('/api/room-details', roomDetailRoutes);
   app.use('/api/contact', contactRoutes);
   app.use('/api/footer', footerRoutes);
+  app.use('/api/cms', cmsRoutes);
   app.use('/api/contact-messages', contactMessageRoutes);
 
 

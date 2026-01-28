@@ -7,6 +7,11 @@ export interface IRoom {
   description: string;
   guests: string;
   bedrooms: string;
+  city?: string;
+  location?: string;
+  availability?: boolean;
+  availableFrom?: string;
+  capacity?: number;
 }
 
 export interface IHeroSection {
@@ -112,7 +117,12 @@ const RoomSchema = new Schema<IRoom>({
   title: { type: String, required: true, default: 'Nouvelle chambre' },
   description: { type: String, required: true, default: 'Description de la chambre' },
   guests: { type: String, required: true, default: 'jusqu\'à 2 invités' },
-  bedrooms: { type: String, required: true, default: '1 chambre à coucher' }
+  bedrooms: { type: String, required: true, default: '1 chambre à coucher' },
+  city: { type: String, required: false, default: 'Paris' },
+  location: { type: String, required: false, default: 'City Center' },
+  availability: { type: Boolean, required: false, default: true },
+  availableFrom: { type: String, required: false, default: () => new Date().toISOString().split('T')[0] },
+  capacity: { type: Number, required: false, default: 4 }
 });
 
 // Schéma Hero Section

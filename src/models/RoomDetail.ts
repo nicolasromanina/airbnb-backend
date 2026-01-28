@@ -12,6 +12,11 @@ export interface IRoomDetail extends Document {
   images: string[];
   features: string[];
   videoUrl?: string;
+  city?: string;
+  location?: string;
+  availability?: boolean;
+  availableFrom?: string;
+  capacity?: number;
   // Informations générales additionnelles
   accommodationType?: string;
   includes?: string[];
@@ -74,6 +79,31 @@ const RoomDetailSchema = new Schema<IRoomDetail>({
     type: String,
     required: false,
     default: ''
+  },
+  city: {
+    type: String,
+    required: false,
+    default: 'Paris'
+  },
+  location: {
+    type: String,
+    required: false,
+    default: 'City Center'
+  },
+  availability: {
+    type: Boolean,
+    required: false,
+    default: true
+  },
+  availableFrom: {
+    type: String,
+    required: false,
+    default: () => new Date().toISOString().split('T')[0]
+  },
+  capacity: {
+    type: Number,
+    required: false,
+    default: 4
   },
   accommodationType: {
     type: String,
