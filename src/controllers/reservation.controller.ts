@@ -343,12 +343,11 @@ export class ReservationController {
         return res.status(404).json({ error: 'Reservation not found' });
       }
 
-      // Only allow deletion of cancelled or completed reservations
-      if (!['cancelled', 'completed'].includes(reservation.status)) {
+      // Allow deletion of non-checked-in reservations
+      if (['check-in', 'checked-in'].includes(reservation.status)) {
         return res.status(400).json({ 
-          error: 'Cannot delete reservation with current status',
-          currentStatus: reservation.status,
-          allowedStatuses: ['cancelled', 'completed']
+          error: 'Cannot delete reservation - guest has already checked in',
+          currentStatus: reservation.status
         });
       }
 
