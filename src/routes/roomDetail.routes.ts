@@ -31,7 +31,7 @@ router.post('/upload', authenticate, upload.single('image'), uploadToCloudinary,
 });
 
 // Route upload vidéo (Cloudinary)
-router.post('/upload-video', authenticate, uploadVideo.single('video'), uploadToCloudinary, (req, res) => {
+router.post('/upload-video', authenticate, uploadVideo.single('video'), uploadToCloudinary, (req: any, res) => {
   try {
     if (!req.cloudinaryUrl) {
       return res.status(400).json({ success: false, error: 'Erreur lors du téléchargement vers Cloudinary' });
