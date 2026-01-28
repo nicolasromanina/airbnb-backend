@@ -13,6 +13,7 @@ export interface IRoomDetail extends Document {
   features: string[];
   videoUrl?: string;
   city?: string;
+  country?: string;
   location?: string;
   availability?: boolean;
   availableFrom?: string;
@@ -84,6 +85,11 @@ const RoomDetailSchema = new Schema<IRoomDetail>({
     type: String,
     required: false,
     default: 'Paris'
+  },
+  country: {
+    type: String,
+    required: false,
+    default: 'France'
   },
   location: {
     type: String,
