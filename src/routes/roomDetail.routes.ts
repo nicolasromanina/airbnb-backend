@@ -47,6 +47,28 @@ router.post('/upload-video', authenticate, uploadVideo.single('video'), uploadTo
   }
 });
 
+// Route upload image pour les options supplémentaires (Cloudinary)
+router.post('/upload-option-image', authenticate, upload.single('image'), uploadToCloudinary, (req: any, res) => {
+  try {
+    if (!req.cloudinaryUrl) {
+      return res.status(400).json({ success: false, error: 'Erreur lors du téléchargement vers Cloudinary' });
+    }
+    
+    res.json({ 
+      success: true, 
+      data: {
+        url: req.cloudinaryUrl, 
+        publicId: req.cloudinaryPublicId
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: 'Erreur lors du traitement de l\'image' 
+    });
+  }
+});
+
 // Routes publiques (lecture)
 router.get('/', roomDetailController.getAllRoomDetails);
 router.get('/:roomId', roomDetailController.getRoomDetail);
