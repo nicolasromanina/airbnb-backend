@@ -190,7 +190,8 @@ app.use(cors({
     next();
   });
 
-  // Connect to MongoDB
+  // Connect to MongoDB in the background (non-blocking)
+  // This runs after the server starts so health checks respond immediately
   connectDatabase().catch((err) => {
     logger.error('❌ Failed to initialize database:', err);
     process.exit(1);
