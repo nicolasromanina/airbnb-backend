@@ -9,6 +9,14 @@ import stream from 'stream';
 
 const toDate = (v?: any) => v ? new Date(v) : undefined;
 
+// Helper to transform reservation data and add paymentStatus
+const transformReservationData = (item: any) => {
+  return {
+    ...item,
+    paymentStatus: item.payment?.status || 'pending'
+  };
+};
+
 export const listReservations = async (req: Request, res: Response) => {
   try {
     const page = Math.max(1, parseInt((req.query.page as string) || '1'));
@@ -55,7 +63,10 @@ export const listReservations = async (req: Request, res: Response) => {
       .limit(limit)
       .lean();
 
-    res.json({ data: items, meta: { total, page, limit } });
+    // Transform items to add paymentStatus
+    const transformedItems = items.map(transformReservationData);
+
+    res.json({ data: transformedItems, meta: { total, page, limit } });
   } catch (error) {
     res.status(500).json({ error: 'Failed to list reservations', details: (error as any).message });
   }
@@ -68,7 +79,10 @@ export const getReservation = async (req: Request, res: Response) => {
       .populate('payment')
       .lean();
     if (!r) return res.status(404).json({ error: 'Reservation not found' });
-    res.json({ data: r });
+    
+    // Transform to add paymentStatus
+    const transformedData = transformReservationData(r);
+    res.json({ data: transformedData });
   } catch (error) {
     res.status(500).json({ error: 'Failed to get reservation', details: (error as any).message });
   }
@@ -76,7 +90,10 @@ export const getReservation = async (req: Request, res: Response) => {
 
 export const confirmReservation = async (req: Request, res: Response) => {
   try {
-    const r = await Reservation.findByIdAndUpdate(req.params.id, { status: 'confirmed' }, { new: true }).populate('user', 'email firstName lastName');
+    const r = await Reservation.findByIdAndUpdate(req.params.id, { status: 'confirmed' }, { new: true })
+      .populate('user', 'email firstName lastName')
+      .populate('payment')
+      .lean();
     if (!r) return res.status(404).json({ error: 'Reservation not found' });
 
     // Notify user via email (if configured)
@@ -88,7 +105,8 @@ export const confirmReservation = async (req: Request, res: Response) => {
       // ignore email errors
     }
 
-    res.json({ data: r });
+    const transformedData = transformReservationData(r);
+    res.json({ data: transformedData });
   } catch (error) {
     res.status(500).json({ error: 'Failed to confirm reservation', details: (error as any).message });
   }
@@ -96,7 +114,10 @@ export const confirmReservation = async (req: Request, res: Response) => {
 
 export const cancelReservation = async (req: Request, res: Response) => {
   try {
-    const r = await Reservation.findByIdAndUpdate(req.params.id, { status: 'cancelled' }, { new: true }).populate('user', 'email firstName lastName');
+    const r = await Reservation.findByIdAndUpdate(req.params.id, { status: 'cancelled' }, { new: true })
+      .populate('user', 'email firstName lastName')
+      .populate('payment')
+      .lean();
     if (!r) return res.status(404).json({ error: 'Reservation not found' });
 
     // Optionally update payment
@@ -113,7 +134,8 @@ export const cancelReservation = async (req: Request, res: Response) => {
       // ignore email errors
     }
 
-    res.json({ data: r });
+    const transformedData = transformReservationData(r);
+    res.json({ data: transformedData });
   } catch (error) {
     res.status(500).json({ error: 'Failed to cancel reservation', details: (error as any).message });
   }
