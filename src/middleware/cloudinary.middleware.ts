@@ -55,6 +55,14 @@ export const uploadToCloudinary = async (req: any, res: any, next: any) => {
   }
 
   try {
+    // Log file information for debugging
+    console.log('📤 Upload to Cloudinary:', {
+      filename: req.file.originalname,
+      size: req.file.size,
+      mimetype: req.file.mimetype,
+      path: req.path
+    });
+
     // Déterminer le type de ressource (image ou vidéo)
     const resourceType = req.file.mimetype.startsWith('video/') ? 'video' : 'image';
     
@@ -74,12 +82,21 @@ export const uploadToCloudinary = async (req: any, res: any, next: any) => {
       },
       (error, result) => {
         if (error) {
-          console.error('Cloudinary upload error:', error);
+          console.error('❌ Cloudinary upload error:', error);
           return res.status(500).json({ 
             error: `Erreur lors du téléchargement vers Cloudinary`,
             details: error.message 
           });
         }
+        
+        // Log successful upload
+        console.log('✅ Cloudinary upload success:', {
+          url: result?.secure_url,
+          publicId: result?.public_id,
+          size: result?.bytes,
+          width: result?.width,
+          height: result?.height
+        });
         
         // Attach the Cloudinary result to the request
         req.cloudinaryUrl = result?.secure_url;
@@ -90,7 +107,8 @@ export const uploadToCloudinary = async (req: any, res: any, next: any) => {
     );
 
     // Write the buffer to the stream
-    stream.end(req.file.buffer);
+    stream.write(req.file.buffer);
+    stream.end();
   } catch (error) {
     console.error('Upload processing error:', error);
     res.status(500).json({ 
