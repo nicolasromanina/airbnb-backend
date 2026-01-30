@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import promotionController from '../controllers/promotion.controller';
 import { authenticate } from '../middleware/auth.middleware';
-import { uploadToCloudinary } from '../middleware/cloudinary.middleware';
-import { upload } from '../middleware/upload.middleware';
+import { upload, uploadToCloudinary } from '../middleware/cloudinary.middleware';
 
 const router = Router();
 
