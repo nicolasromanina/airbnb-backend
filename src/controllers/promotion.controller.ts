@@ -4,14 +4,34 @@ import { Promotion } from '../models/Promotion';
 export const getPromotionByRoomId = async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
-    const promotion = await Promotion.findOne({ roomId: Number(roomId) }).lean();
+    const roomIdNumber = Number(roomId);
+    const roomIdString = String(roomId);
+    
+    console.log('🔍 Searching for promotion:', { roomId, roomIdNumber, roomIdString });
+
+    // Try to find with number first, then with string if not found
+    let promotion = await Promotion.findOne({ roomId: roomIdNumber }).lean();
     
     if (!promotion) {
+      console.log('📌 Not found as number, trying as string...');
+      // MongoDB might have stored it as string, so also try that
+      promotion = await Promotion.findOne({ roomId: roomIdString } as any).lean();
+    }
+    
+    if (!promotion) {
+      console.log('❌ Promotion not found for roomId:', roomId);
       return res.status(404).json({ success: false, error: 'Promotion not found' });
     }
     
+    console.log('✅ Promotion found:', {
+      roomId: promotion.roomId,
+      title: promotion.title,
+      hasImage: !!promotion.image
+    });
+    
     res.json({ success: true, data: promotion });
   } catch (error) {
+    console.error('❌ Error fetching promotion:', error);
     res.status(500).json({ success: false, error: 'Failed to fetch promotion', details: (error as any).message });
   }
 };
@@ -20,16 +40,30 @@ export const updatePromotion = async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
     const updateData = req.body;
+    const roomIdNumber = Number(roomId);
+
+    console.log('🔄 Updating promotion:', {
+      roomId: roomIdNumber,
+      hasTitle: !!updateData.title,
+      hasImage: !!updateData.image,
+      hasCardImage: !!updateData.cardImage
+    });
+
+    // Ensure roomId is always a number in the update data
+    const sanitizedData = {
+      ...updateData,
+      roomId: roomIdNumber
+    };
 
     // Use new: true to get the updated document, and runValidators: false to avoid validation errors on partial updates
     const promotion = await Promotion.findOneAndUpdate(
-      { roomId: Number(roomId) },
-      updateData,
+      { $or: [{ roomId: roomIdNumber }, { roomId: String(roomId) } as any] },
+      sanitizedData,
       { new: true, upsert: true, runValidators: false }
     ).lean();
 
     console.log('✅ Promotion updated:', {
-      roomId,
+      roomId: promotion?.roomId,
       title: promotion?.title,
       image: promotion?.image,
       cardImage: promotion?.cardImage,
