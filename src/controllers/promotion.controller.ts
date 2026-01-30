@@ -21,14 +21,24 @@ export const updatePromotion = async (req: Request, res: Response) => {
     const { roomId } = req.params;
     const updateData = req.body;
 
+    // Use new: true to get the updated document, and runValidators: false to avoid validation errors on partial updates
     const promotion = await Promotion.findOneAndUpdate(
       { roomId: Number(roomId) },
       updateData,
-      { new: true, upsert: true }
+      { new: true, upsert: true, runValidators: false }
     ).lean();
+
+    console.log('✅ Promotion updated:', {
+      roomId,
+      title: promotion?.title,
+      image: promotion?.image,
+      cardImage: promotion?.cardImage,
+      isActive: promotion?.isActive
+    });
 
     res.json({ success: true, data: promotion });
   } catch (error) {
+    console.error('❌ Error updating promotion:', error);
     res.status(500).json({ success: false, error: 'Failed to update promotion', details: (error as any).message });
   }
 };
