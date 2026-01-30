@@ -15,6 +15,7 @@ import serviceRoutes from './routes/service.routes';
 import apartmentRoutes from './routes/apartment.routes';
 import apartmentDetailRoutes from './routes/apartmentDetail.routes';
 import roomDetailRoutes from './routes/roomDetail.routes';
+import promotionRoutes from './routes/promotion.routes';
 import contactRoutes from './routes/contact.routes';
 import footerRoutes from './routes/footer.routes';
 import cmsRoutes from './routes/cms.routes';
@@ -208,6 +209,7 @@ app.use(cors({
   app.use('/api/apartment', apartmentRoutes);
   app.use('/api/apartment-details', apartmentDetailRoutes);
   app.use('/api/room-details', roomDetailRoutes);
+  app.use('/api/promotions', promotionRoutes);
   app.use('/api/contact', contactRoutes);
   app.use('/api/footer', footerRoutes);
   app.use('/api/cms', cmsRoutes);
