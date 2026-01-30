@@ -40,7 +40,7 @@ export const getPromotionByRoomId = async (req: Request, res: Response) => {
 export const updatePromotion = async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
-    const updateData = req.body;
+    let updateData = req.body;
     const roomIdNumber = Number(roomId);
 
     console.log('🔄 Updating promotion:', {
@@ -56,10 +56,35 @@ export const updatePromotion = async (req: Request, res: Response) => {
       roomId: roomIdNumber
     };
 
+    // Filter out empty/null values to prevent overwriting with empty data
+    // Only update fields that are explicitly provided and have values
+    const cleanedData = Object.entries(sanitizedData).reduce((acc, [key, value]) => {
+      // Always include roomId
+      if (key === 'roomId') {
+        acc[key] = value;
+        return acc;
+      }
+      
+      // For other fields, only include if they have a value
+      // This prevents auto-save with empty fields from clearing existing data
+      if (value !== null && value !== undefined && value !== '') {
+        acc[key] = value;
+      }
+      
+      return acc;
+    }, {} as any);
+
+    console.log('📝 Cleaned data for update:', {
+      fields: Object.keys(cleanedData),
+      hasTitle: !!cleanedData.title,
+      hasImage: !!cleanedData.image,
+      hasCardImage: !!cleanedData.cardImage
+    });
+
     // Use new: true to get the updated document, and runValidators: false to avoid validation errors on partial updates
     const promotion = await Promotion.findOneAndUpdate(
       { $or: [{ roomId: roomIdNumber }, { roomId: String(roomId) } as any] },
-      sanitizedData,
+      cleanedData,
       { new: true, upsert: true, runValidators: false }
     ).lean();
 
