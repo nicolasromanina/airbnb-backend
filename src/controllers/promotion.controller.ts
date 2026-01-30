@@ -26,7 +26,8 @@ export const getPromotionByRoomId = async (req: Request, res: Response) => {
     console.log('✅ Promotion found:', {
       roomId: promotion.roomId,
       title: promotion.title,
-      hasImage: !!promotion.image
+      hasImage: !!promotion.image,
+      isActive: promotion.isActive ?? true  // Show isActive, defaulting to true if undefined
     });
     
     res.json({ success: true, data: promotion });
