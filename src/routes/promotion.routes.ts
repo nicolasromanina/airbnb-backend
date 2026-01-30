@@ -13,6 +13,7 @@ router.get('/:roomId', promotionController.getPromotionByRoomId);
 router.put('/:roomId', authenticate, promotionController.updatePromotion);
 router.post('/', authenticate, promotionController.createPromotion);
 router.post('/:roomId/upload', authenticate, upload.single('image'), uploadToCloudinary, promotionController.uploadPromotionImage);
+router.post('/:roomId/upload-card', authenticate, upload.single('image'), uploadToCloudinary, promotionController.uploadPromotionCardImage);
 router.delete('/:id', authenticate, promotionController.deletePromotion);
 
 export default router;

@@ -50,6 +50,23 @@ export const uploadPromotionImage = async (req: Request, res: Response) => {
   }
 };
 
+export const uploadPromotionCardImage = async (req: Request, res: Response) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, error: 'No file uploaded' });
+    }
+
+    const cloudinaryUrl = (req as any).cloudinaryUrl;
+    if (!cloudinaryUrl) {
+      return res.status(500).json({ success: false, error: 'Failed to upload to Cloudinary' });
+    }
+
+    res.json({ success: true, url: cloudinaryUrl });
+  } catch (error) {
+    res.status(500).json({ success: false, error: 'Failed to upload promotion card image', details: (error as any).message });
+  }
+};
+
 export const getPromotion = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -94,4 +111,4 @@ export const deletePromotion = async (req: Request, res: Response) => {
   }
 };
 
-export default { getPromotionByRoomId, updatePromotion, uploadPromotionImage, getPromotion, createPromotion, deletePromotion };
+export default { getPromotionByRoomId, updatePromotion, uploadPromotionImage, uploadPromotionCardImage, getPromotion, createPromotion, deletePromotion };

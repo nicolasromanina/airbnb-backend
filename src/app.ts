@@ -168,7 +168,14 @@ app.use(cors({
   app.use('/api/', limiter);
 
   // Increase body size limits to allow larger page payloads (e.g., base64 images)
-  app.use(express.json({ limit: process.env.REQUEST_LIMIT || '10mb' }));
+  // Custom middleware to skip JSON parsing for multipart/form-data routes
+  app.use((req, res, next) => {
+    // Skip JSON parsing for upload routes (they use multipart/form-data)
+    if (req.path.includes('/upload')) {
+      return next();
+    }
+    express.json({ limit: process.env.REQUEST_LIMIT || '10mb' })(req, res, next);
+  });
   app.use(express.urlencoded({ extended: true, limit: process.env.REQUEST_LIMIT || '10mb' }));
 
   // Health check BEFORE logging and database - must respond instantly

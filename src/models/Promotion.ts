@@ -5,6 +5,7 @@ export interface IPromotion extends Document {
   title: string;
   description: string;
   image: string;
+  cardImage: string;
   badge: {
     label: string;
     color: string;
@@ -39,6 +40,11 @@ const PromotionSchema = new Schema<IPromotion>({
     type: String,
     required: true,
     default: '/assets/bedroom-promo.jpg'
+  },
+  cardImage: {
+    type: String,
+    required: false,
+    default: '/assets/promo-card.jpg'
   },
   badge: {
     label: {
